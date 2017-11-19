@@ -1,12 +1,19 @@
 import React from 'react';
+import RootNavigator from './src/navigation/RootNavigator';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import logger from 'redux-logger';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger));
+
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={store}>
+        <RootNavigatorX />
+      </Provider>
     );
   }
 }
