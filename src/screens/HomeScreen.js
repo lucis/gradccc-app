@@ -1,7 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { NavigationActions } from 'react-navigation';
-import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     container:{
@@ -19,6 +17,11 @@ class HomeScreen extends React.Component {
     header: null
   };
 
+  goToGradeAntiga() {
+    const {navigate} = this.props.navigation;
+    navigate('GradeAntiga');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -26,7 +29,7 @@ class HomeScreen extends React.Component {
           <Text>Aqui colocar a abertura do app</Text>
         </View>
         <View style={styles.tile}>
-          <TouchableOpacity onPress={() => this.goToLogin()}>
+          <TouchableOpacity onPress={() => this.goToGradeAntiga()}>
             <Text style={{ textAlign: 'center', color: 'white' }}>Ir para página de seleção</Text>
           </TouchableOpacity>
         </View>
@@ -34,4 +37,4 @@ class HomeScreen extends React.Component {
     );
   }
 }
-export default connect()(HomeScreen);
+export default HomeScreen;

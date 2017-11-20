@@ -1,17 +1,18 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import Cadeira from '../components/Cadeira';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     container:{
         marginTop: 20,
-        flexDirection: 'row',
-        height: 100
+        flexDirection: 'column',
+        flex: 1
     },
-    tile: {
-      flex: 0.5,
-      backgroundColor: '#069'
+    titulo: {
+      fontSize: 25,
+      color: '#111'
     }
 });
 class GradeAntigaScreen extends React.Component {
@@ -33,11 +34,11 @@ class GradeAntigaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.tile}>
-          <Text>Grade Antiga</Text>
-        </View>
-        <View style={styles.tile}>
-          Deve ir a seleção de cadeiras
+        <Text style={styles.titulo}>Título</Text>
+        <View style={{padding: 10}}>
+          {['Cadeira 1', 'Cadeira 2', 'Cadeira 3', 'Cadeira 4'].map((nome)=>(
+            <Cadeira nomeCadeira={nome}/>
+          ))}
         </View>
       </View>
     );
