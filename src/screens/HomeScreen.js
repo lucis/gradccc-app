@@ -19,26 +19,15 @@ class HomeScreen extends React.Component {
     header: null
   };
 
-  goToLogin() {
-    const { nav, dispatch } = this.props;
-    const navigateAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Login' }),
-      ],
-    });
-    dispatch(navigateAction);
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.tile}>
-          <Text>Home Page</Text>
+          <Text>Aqui colocar a abertura do app</Text>
         </View>
         <View style={styles.tile}>
           <TouchableOpacity onPress={() => this.goToLogin()}>
-            <Text style={{ textAlign: 'center', color: 'white' }}>Ir para página de Login</Text>
+            <Text style={{ textAlign: 'center', color: 'white' }}>Ir para página de seleção</Text>
           </TouchableOpacity>
         </View>
       </View>

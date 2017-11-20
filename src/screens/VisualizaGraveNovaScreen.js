@@ -14,24 +14,33 @@ const styles = StyleSheet.create({
       backgroundColor: '#069'
     }
 });
-class SelecionaGradeScreen extends React.Component {
+class VisualizaGradeNovaScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
+  goToGradeNova() {
+    const { nav, dispatch } = this.props;
+    const navigateAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'GradeNova' }),
+      ],
+    });
+    dispatch(navigateAction);
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.tile}>
-          <Text>Aqui colocar a abertura do app</Text>
+          <Text>Grade Nova</Text>
         </View>
         <View style={styles.tile}>
-          <TouchableOpacity onPress={() => this.goToLogin()}>
-            <Text style={{ textAlign: 'center', color: 'white' }}>Ir para página de seleção</Text>
-          </TouchableOpacity>
+          Devem ir as cadeiras selecionadas
         </View>
       </View>
     );
   }
 }
-export default connect()(SelecionaGradeScreen);
+export default connect()(VisualizaGradeNovaScreen);
