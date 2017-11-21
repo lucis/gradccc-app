@@ -16,11 +16,15 @@ const styles = StyleSheet.create({
         margin: 10,
         flexDirection: 'row',
         height: 70,
-        borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da',
+        borderRadius: 4, borderWidth: 2, borderColor: '#fff',
         backgroundColor: '#069'
     },
     texto: {
       fontSize: 20
+    },
+    textoSelecionado: {
+        fontSize: 20,
+        color: '#fff'
     }
 });
 
@@ -41,7 +45,7 @@ class Cadeira extends Component{
         return (
         <TouchableOpacity onPress={this.selecionou.bind(this)}>
             <View style={(this.state.selecionado) ? styles.containerSelecionado : styles.container}>
-                <Text style={styles.texto}>{this.props.nomeCadeira}</Text>
+                <Text style={(this.state.selecionado) ? styles.textoSelecionado : styles.texto}>{this.props.nomeCadeira}</Text>
             </View>
         </TouchableOpacity>);
     };

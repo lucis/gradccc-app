@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import Cadeira from '../components/Cadeira';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 const styles = StyleSheet.create({
     container:{
@@ -34,12 +35,15 @@ class GradeAntigaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Título</Text>
-        <View style={{padding: 10}}>
-          {['Cadeira 1', 'Cadeira 2', 'Cadeira 3', 'Cadeira 4'].map((nome)=>(
-            <Cadeira nomeCadeira={nome}/>
-          ))}
-        </View>
+        <Header headerText="Grande antiga" />
+        <ScrollView>
+          <View style={{padding: 10}}>
+            {['LPT', 'Cálculo 1', 'Vetorial', 'Prog 1',
+             'LP1', 'IC', 'Optativa I', 'Optativa II'].map((nome)=>(
+              <Cadeira key={nome} nomeCadeira={nome}/>
+            ))}
+          </View>
+        </ScrollView >
       </View>
     );
   }
