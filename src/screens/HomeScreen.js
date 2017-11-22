@@ -46,7 +46,7 @@ class HomeScreen extends React.Component {
         </View>
       </View>*/
       <View style={styles.container}>
-        <Header headerText="GradCCC(logo)" />
+        <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
           <Text style={styles.textStyle}>Bem Vindo ao GradCCC!</Text>
           <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
