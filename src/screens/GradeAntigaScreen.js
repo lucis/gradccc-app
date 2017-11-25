@@ -41,6 +41,12 @@ class GradeAntigaScreen extends React.Component {
     header: null
   };
 
+  componentWillMount(){
+    this.setState({
+      selecionarTudo: false
+    });
+  }
+
   goToGradeNova() {
     const { nav, dispatch } = this.props;
     const navigateAction = NavigationActions.reset({
@@ -55,8 +61,13 @@ class GradeAntigaScreen extends React.Component {
   renderPeriod(period) {
     return(
       this.props.disciplines.filter(discipline => discipline.periodo === period)
-        .map((discipline) => ( <Cadeira key={discipline.nome} nomeCadeira={discipline.nome} /> ))
+        .map((discipline) => ( <Cadeira key={discipline.nome} nomeCadeira={discipline.nome} selecionar={this.state.selecionarTudo} /> ))
     );
+  }
+
+  selecionarTudo() {
+    const { selecionarTudo } = this.state;
+    this.setState({selecionarTudo: true});
   }
 
   render() {
@@ -65,7 +76,6 @@ class GradeAntigaScreen extends React.Component {
         <Header headerText="Grande antiga" />
         <ScrollView>
           <View style={{padding: 10}}>
-
             <Text style={styles.textStyle}>1º Período</Text>
             {this.renderPeriod(1)}
 
@@ -75,6 +85,10 @@ class GradeAntigaScreen extends React.Component {
             <Text style={styles.textStyle}>Optativas</Text>
             {this.renderPeriod(0)}
           </View>
+
+          <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
+            <Text style={styles.buttonText}>Selecionar Tudo</Text>
+          </TouchableOpacity>
         </ScrollView>
         <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text style={styles.buttonText}>Migrar</Text>

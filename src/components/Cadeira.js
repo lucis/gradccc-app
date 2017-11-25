@@ -36,6 +36,11 @@ class Cadeira extends Component{
         });
     };
 
+    componentWillReceiveProps(nextProps) {
+        const { selecionado } = this.state;
+        this.setState({selecionado: nextProps.selecionar});
+    }
+
     selecionou() {
         const { selecionado } = this.state;
         this.setState({selecionado: !selecionado});
