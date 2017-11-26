@@ -3,6 +3,7 @@ import React from 'React';
 import HomeScreen from "./../screens/HomeScreen";
 import GradeAntigaScreen from "./../screens/GradeAntigaScreen";
 import GradeNovaScreen from "./../screens/GradeNovaScreen";
+import FeedbackScreen from "./../screens/FeedbackScreen";
 
 export const RootNavigator = StackNavigator(
   {
@@ -15,14 +16,20 @@ export const RootNavigator = StackNavigator(
     GradeAntiga: {
         screen: GradeAntigaScreen,
         navigationOptions: {
-            gesturesEnabled: false
-          }
+          gesturesEnabled: false
+        }
     },
     GradeNova: {
         screen: GradeNovaScreen,
         navigationOptions: {
-            gesturesEnabled: false
-          }
+          gesturesEnabled: false
+        }
+    },
+    Feedback: {
+      screen: FeedbackScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
     }
   },
   {

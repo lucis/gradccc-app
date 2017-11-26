@@ -32,19 +32,13 @@ class HomeScreen extends React.Component {
     navigate('GradeAntiga');
   }
 
+  goToFeedback() {
+    const {navigate} = this.props.navigation;
+    navigate('Feedback');
+  }
+
   render() {
     return (
-      /*
-      <View style={styles.container}>
-        <View style={styles.tile}>
-          <Text style={styles.titulo}>GradCCC(logo)</Text>
-        </View>
-        <View style={styles.tile}>
-          <TouchableOpacity onPress={() => this.goToGradeAntiga()}>
-            <Text style={{ textAlign: 'center', color: 'white' }}>Ir para página de seleção</Text>
-          </TouchableOpacity>
-        </View>
-      </View>*/
       <View style={styles.container}>
         <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
@@ -52,6 +46,9 @@ class HomeScreen extends React.Component {
           <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
+          </Button>
+          <Button onPress={() => this.goToFeedback()}>
+            Feedback
           </Button>
         </View>
       </View>
