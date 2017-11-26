@@ -52,19 +52,11 @@
         "periodo": 2
     },
     {
-        "nome": "TECC(Análise de Dados I)",
+        "nome": "TECC(Aplic de Parad de Ling de Program.)",
         "periodo": 0
     },
     {
-        "nome": "TECC(Análise de Dados II)",
+        "nome": "TECC(Aplicações de Teoria dos Grafos)",
         "periodo": 0
-    },
-    {
-        "nome": "TECC(ALGORITMOS AVANÇADOS I)",
-        "periodo": 0
-    },
-    {
-        "nome": "Futsal",
-        "periodo": 0
-    }  
+    } 
 ]
