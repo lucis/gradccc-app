@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import Header from '../components/Header';
 import Button from '../components/Button';
+import Header from '../components/Header';
 
 const styles = StyleSheet.create({
     container:{
@@ -37,6 +37,11 @@ class HomeScreen extends React.Component {
     navigate('Feedback');
   }
 
+  goToLogin() {
+    const {navigate} = this.props.navigation;
+    navigate('Login');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -46,6 +51,9 @@ class HomeScreen extends React.Component {
           <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
+          </Button>
+          <Button onPress={() => this.goToLogin()}>
+            Login
           </Button>
           <Button onPress={() => this.goToFeedback()}>
             Feedback
