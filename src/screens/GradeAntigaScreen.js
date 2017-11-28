@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
-import Cadeira from '../components/Cadeira';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Cadeira from '../components/Cadeira';
 
 const styles = StyleSheet.create({
     container:{
