@@ -42,7 +42,7 @@ class LoginForm extends Component
                 <CardSection>
                     <Input
                         label="Email"
-                        placeholder="Enter your email"
+                        placeholder="nome@ccc.ufcg.edu.br"
                         onChangeText={this.onEmailChange.bind(this)}
                         value={this.props.email}
                     />
@@ -52,7 +52,7 @@ class LoginForm extends Component
                     <Input 
                         secureTextEntry
                         label="Password"
-                        placeholder="Enter your password"
+                        placeholder="digite sua senha.."
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}
                     />
