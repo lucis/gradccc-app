@@ -35,15 +35,11 @@ class LoginScreen extends React.Component {
   };
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
     return (
-        <Provider store={store}>
-            <View style={styles.container}>
-                <Header headerText="GradCCC" />
-                <LoginForm />
-            </View>
-        </Provider>
+        <View style={styles.container}>
+            <Header headerText="GradCCC" />
+            <LoginForm />
+        </View>   
     );
   }
 };

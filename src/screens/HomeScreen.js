@@ -1,7 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { connect } from 'react-redux';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import { logoutUser } from '../actions';
 
 const styles = StyleSheet.create({
     container:{
@@ -42,6 +44,23 @@ class HomeScreen extends React.Component {
     navigate('Login');
   }
 
+  renderLoginButton(){
+    if(this.props.auth.user==null){
+      return(
+        <Button onPress={() => this.goToLogin()}>
+          Login
+        </Button>
+      );
+    }
+    else{
+      return (
+        <Button onPress={() => this.props.logoutUser()}>
+          Logout
+        </Button>
+      );
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -52,15 +71,18 @@ class HomeScreen extends React.Component {
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
-          <Button onPress={() => this.goToLogin()}>
-            Login
-          </Button>
+          {this.renderLoginButton()}
           <Button onPress={() => this.goToFeedback()}>
             Feedback
           </Button>
         </View>
       </View>
     );
-  }
+  };
 }
-export default HomeScreen;
+
+const mapStateToProps = state => {
+  return { auth: state.auth }
+}
+
+export default connect(mapStateToProps, { logoutUser })(HomeScreen);

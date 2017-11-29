@@ -3,7 +3,8 @@ import { EMAIL_CHANGED,
         PASSWORD_CHANGED, 
         LOGIN_SUCCESS, 
         LOGIN_FAIL,
-        LOGIN_USER } from './types';
+        LOGIN_USER,
+        LOGOUT_USER } from './types';
 
 export const emailChanged = (text) =>{
     return {
@@ -32,6 +33,13 @@ export const loginUser = ({ email, password }) => {
             });
     };
 };
+
+export const logoutUser = () => {
+    return {
+        type: LOGOUT_USER,
+        payload: null
+    };
+}
 
 const loginUserFail = (dispatch) => {
     dispatch({ type: LOGIN_FAIL });

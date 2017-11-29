@@ -2,7 +2,8 @@ import { EMAIL_CHANGED,
     PASSWORD_CHANGED, 
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGIN_USER } from '../actions/types';
+    LOGIN_USER,
+    LOGOUT_USER } from '../actions/types';
 
 const INITIAL_STATE = { email: '', 
                     password: '', 
@@ -24,6 +25,8 @@ export default (state = INITIAL_STATE, action) =>
         case LOGIN_FAIL:
             return { ...state, loading: false, 
                     error: 'Authentication Failed.', password: '' };
+        case LOGOUT_USER:
+            return { ...state, user: action.payload };
         default: 
             return state;
     }
