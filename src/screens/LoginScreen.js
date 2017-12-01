@@ -15,17 +15,22 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1
     },
-    tile: {
-      flex: 0.5,
-      backgroundColor: '#069'
-    },
     screenContent: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+      flex: 1
+    },
+    buttonStyle: {
+        padding: 20,
+        margin: 5,
+        height: 65,
+        width: undefined,
+        alignItems: 'center',
+        backgroundColor: '#069',
+        borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
     },
     textStyle: {
-      fontSize: 14
+        color: '#fff',
+        fontSize: 18,
+        alignSelf: 'center'
     }
 });
 
@@ -34,14 +39,27 @@ class LoginScreen extends React.Component {
     header: null
   };
 
+  goToCadastro() {
+    const {navigate} = this.props.navigation;
+    navigate('Cadastro');
+  }
+
   render() {
     return (
         <View style={styles.container}>
             <Header headerText="GradCCC" />
             <LoginForm />
+            <View style={styles.screenContent}>
+                <TouchableOpacity onPress={() => this.goToCadastro()} 
+                                style={styles.buttonStyle}>
+                    <Text style={styles.textStyle}>
+                        Não possui conta? Cadastre-se aqui.
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>   
     );
-  }
+  };
 };
 
 export default connect()(LoginScreen);

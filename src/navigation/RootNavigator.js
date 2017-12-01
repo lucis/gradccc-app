@@ -5,6 +5,7 @@ import GradeAntigaScreen from "./../screens/GradeAntigaScreen";
 import GradeNovaScreen from "./../screens/GradeNovaScreen";
 import FeedbackScreen from "./../screens/FeedbackScreen";
 import LoginScreen from "./../screens/LoginScreen";
+import CadastroScreen from './../screens/CadastroScreen';
 
 export const RootNavigator = StackNavigator(
   {
@@ -37,6 +38,12 @@ export const RootNavigator = StackNavigator(
       navigationOptions: {
         gesturesEnabled: false
       }
+    },
+    Cadastro: {
+      screen: CadastroScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      }      
     }
   },
   {
