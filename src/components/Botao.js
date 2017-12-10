@@ -18,14 +18,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const Button = (props) => {
+const Botao = (props) => {
+    const { buttonStyle, textStyle } = styles;
+    
     return(
-        <TouchableOpacity onPress={props.onPress} style={styles.buttonStyle}>
-            <Text style={styles.textStyle}>
+        <TouchableOpacity onPress={props.onPress} style={buttonStyle}>
+            <Text style={textStyle}>
                 {props.children}
             </Text>
         </TouchableOpacity>
     );
 }
 
-export default Button;
+export { Botao };

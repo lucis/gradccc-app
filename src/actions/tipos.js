@@ -1,0 +1,1 @@
+export const SELECIONAR_DISCIPLINA = 'selecionar_disciplina';

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
-import Cadeira from '../components/Cadeira';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
-import Button from '../components/Button';
+import { selecionarDisciplina } from '../actions';
+import Disciplina from '../components/Disciplina';
+import { Cabecalho } from '../components';
 
 const styles = StyleSheet.create({
     container:{
@@ -41,12 +41,6 @@ class GradeAntigaScreen extends React.Component {
     header: null
   };
 
-  componentWillMount(){
-    this.setState({
-      selecionarTudo: false
-    });
-  }
-
   goToGradeNova() {
     const { nav, dispatch } = this.props;
     const navigateAction = NavigationActions.reset({
@@ -58,32 +52,31 @@ class GradeAntigaScreen extends React.Component {
     dispatch(navigateAction);
   }
 
-  renderPeriod(period) {
+  gerarPeriodo(periodo) {
     return(
-      this.props.disciplines.filter(discipline => discipline.periodo === period)
-        .map((discipline) => ( <Cadeira key={discipline.nome} nomeCadeira={discipline.nome} selecionar={this.state.selecionarTudo} /> ))
+      this.props.disciplinas.filter(disciplina => disciplina.periodo === periodo)
+        .map((disciplina) => ( <Disciplina key={disciplina.nome} nome={disciplina.nome} /> ))
     );
   }
 
   selecionarTudo() {
-    const { selecionarTudo } = this.state;
-    this.setState({selecionarTudo: true});
+    this.props.selecionarDisciplina(true);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grande antiga" />
+        <Cabecalho texto="Grande antiga" />
         <ScrollView>
           <View style={{padding: 10}}>
             <Text style={styles.textStyle}>1º Período</Text>
-            {this.renderPeriod(1)}
+            {this.gerarPeriodo(1)}
 
             <Text style={styles.textStyle}>2º Período</Text>
-            {this.renderPeriod(2)}
+            {this.gerarPeriodo(2)}
 
             <Text style={styles.textStyle}>Optativas</Text>
-            {this.renderPeriod(0)}
+            {this.gerarPeriodo(0)}
           </View>
 
           <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
@@ -99,7 +92,9 @@ class GradeAntigaScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { disciplines: state.disciplines }
+  const { selecionada } = state.cadeira;
+  
+  return { disciplinas: state.disciplinas, selecionada  };
 }
 
-export default connect(mapStateToProps)(GradeAntigaScreen);
+export default connect(mapStateToProps, { selecionarDisciplina })(GradeAntigaScreen);

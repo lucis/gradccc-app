@@ -1,0 +1,55 @@
+import React, { Component } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { connect } from 'react-redux';
+import { selecionarDisciplina } from '../actions'
+
+const styles = StyleSheet.create({
+    container:{
+        padding: 20,
+        margin: 10,
+        flexDirection: 'row',
+        height: 70,
+        backgroundColor: 'transparent',
+        borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da',
+    },
+    containerSelecionado: {
+        padding: 20,
+        margin: 10,
+        flexDirection: 'row',
+        height: 70,
+        borderRadius: 4, borderWidth: 2, borderColor: '#fff',
+        backgroundColor: '#069'
+    },
+    texto: {
+      fontSize: 20
+    },
+    textoSelecionado: {
+        fontSize: 20,
+        color: '#fff'
+    }
+});
+
+class Disciplina extends Component{
+    
+    selecionou() {
+        this.props.selecionarDisciplina(!(this.props.selecionada));
+    }
+
+    render() {
+        return (
+            <TouchableOpacity onPress={this.selecionou.bind(this)}>
+                <View style={(this.props.selecionada) ? styles.containerSelecionado : styles.container}>
+                    <Text style={(this.props.selecionada) ? styles.textoSelecionado : styles.texto}>{this.props.nome}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+    };
+}
+
+const mapStateToProps = state => {
+    const { selecionada } = state.cadeira;
+
+    return { selecionada };
+};
+
+export default connect(mapStateToProps, { selecionarDisciplina })(Disciplina);

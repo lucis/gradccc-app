@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput } from "react-native";
 import { NavigationActions } from 'react-navigation';
-import Header from '../components/Header';
-import Button from '../components/Button';
+import { Cabecalho, Botao } from '../components';
 
 const styles = StyleSheet.create({
     container:{
@@ -34,7 +33,7 @@ class FeedbackScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header headerText="Feedback" />
+                <Cabecalho texto="Feedback" />
                 <View style={styles.content}>
                     <TextInput
                         style = {styles.textarea}
@@ -43,9 +42,9 @@ class FeedbackScreen extends React.Component {
                         editable = {true}
                         underlineColorAndroid= 'rgba(0,0,0,0)'
                     />
-                    <Button onPress={() => {}}>
+                    <Botao onPress={() => {}}>
                         Enviar
-                    </Button>
+                    </Botao>
                 </View>
             </View> 
         );

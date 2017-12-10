@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import Header from '../components/Header';
-import Button from '../components/Button';
+import { Cabecalho, Botao } from '../components';
 
 const styles = StyleSheet.create({
     container:{
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     textStyle: {
-      fontSize: 14
+      fontSize: 18
     }
 });
 class HomeScreen extends React.Component {
@@ -40,16 +39,16 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="GradCCC" />
+        <Cabecalho texto="GradCCC" />
         <View style={styles.screenContent}>
           <Text style={styles.textStyle}>Bem Vindo ao GradCCC!</Text>
           <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
-          <Button onPress={() => this.goToGradeAntiga()}>
+          <Botao onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
-          </Button>
-          <Button onPress={() => this.goToFeedback()}>
+          </Botao>
+          <Botao onPress={() => this.goToFeedback()}>
             Feedback
-          </Button>
+          </Botao>
         </View>
       </View>
     );
