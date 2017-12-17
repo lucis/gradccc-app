@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import { Cabecalho, Botao } from '../components';
 
@@ -18,31 +18,63 @@ const styles = StyleSheet.create({
         fontSize: 14
     },
     textarea: {
-        height: 50,
-        width: 250,
+        marginTop: 20,
+        height: 100,
+        width: 300,
         borderColor: 'gray',
-        borderWidth: 1
-    }
+        borderWidth: 1,
+        fontSize: 20
+    },
+    textStyle: {
+        fontSize: 18,
+        width: 300
+      }
 });
 
 class FeedbackScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {text: ''};
+      }
+
+    _onPressSendButton() { 
+        if(this.state.text == ''){
+            Alert.alert('Por favor, digite algum texto.')
+        }else{
+            Alert.alert('Obrigado pelo seu feedback!')
+            const {navigate} = this.props.navigation;
+            navigate('Home');
+        }
+
+      }
     
     render() {
         return (
             <View style={styles.container}>
                 <Cabecalho texto="Feedback" />
                 <View style={styles.content}>
+                    <Text style = {styles.textStyle}> 
+                    O aplicativo GradCCC foi elaborado para auxiliar os alunos
+                     do curso de Ciência da Computação da UFCG
+                     na migração para a nova grade curricular. 
+                     O seu feedback é muito importante pra nós. 
+                     Entre em contato conosco através do campo abaixo indicando melhorias ou fazendo críticas.
+                     </Text>
                     <TextInput
+                        placeholder = "Escreva aqui seu comentário."
                         style = {styles.textarea}
                         multiline = {true}
                         autoGrow = {true}
                         editable = {true}
+                        maxLength = {2000}
                         underlineColorAndroid= 'rgba(0,0,0,0)'
+                        onChangeText={(text) => this.setState({text})}
                     />
-                    <Botao onPress={() => {}}>
+                    <Botao onPress={() => {this._onPressSendButton()}}>
                         Enviar
                     </Botao>
                 </View>
