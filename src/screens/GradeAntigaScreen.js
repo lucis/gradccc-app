@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { selecionarDisciplina } from '../actions';
 import Disciplina from '../components/Disciplina';
-import { Cabecalho } from '../components';
+import { Cabecalho, Botao } from '../components';
 
 const styles = StyleSheet.create({
     container:{
@@ -63,10 +63,15 @@ class GradeAntigaScreen extends React.Component {
     this.props.selecionarDisciplina(true);
   }
 
+  goToHome(){
+    const {navigate} = this.props.navigation;
+    navigate('Home');
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Cabecalho texto="Grande antiga" />
+        <Cabecalho texto="Grande antiga" backFunction = {() => this.goToHome()}/>
         <ScrollView>
           <View style={{padding: 10}}>
             <Text style={styles.textStyle}>1º Período</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
     viewStyle: {
@@ -19,10 +19,16 @@ const styles = StyleSheet.create({
 
 const Cabecalho = (props) => {
     const { textStyle, viewStyle } = styles;
-
+    const {texto,backFunction} = props;
+   
     return(
         <View style={viewStyle}>
-            <Text style={textStyle}>{props.texto}</Text>
+            <Text style={textStyle}>{texto}</Text>
+                { backFunction ? (
+                <TouchableOpacity onPress={backFunction}>
+                    <Text> Back </Text>
+                </TouchableOpacity>
+                ) : (null)}
         </View>
     );
 }
