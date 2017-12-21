@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { loadGradeAntiga } from '../actions';
 
 const styles = StyleSheet.create({
     container:{
@@ -42,6 +43,7 @@ class GradeAntigaScreen extends React.Component {
   };
 
   componentWillMount(){
+    this.props.loadGradeAntiga();
     this.setState({
       selecionarTudo: false
     });
@@ -58,11 +60,10 @@ class GradeAntigaScreen extends React.Component {
     dispatch(navigateAction);
   }
 
-  renderPeriod(period) {
-    return(
-      this.props.disciplines.filter(discipline => discipline.periodo === period)
-        .map((discipline) => ( <Cadeira key={discipline.nome} nomeCadeira={discipline.nome} selecionar={this.state.selecionarTudo} /> ))
-    );
+  renderPeriodo(periodo) {
+    return (
+      <Text style={styles.textStyle}>{periodo}º período</Text>
+    )
   }
 
   selecionarTudo() {
@@ -76,14 +77,14 @@ class GradeAntigaScreen extends React.Component {
         <Header headerText="Grande antiga" />
         <ScrollView>
           <View style={{padding: 10}}>
-            <Text style={styles.textStyle}>1º Período</Text>
-            {this.renderPeriod(1)}
-
-            <Text style={styles.textStyle}>2º Período</Text>
-            {this.renderPeriod(2)}
+            {Object.keys(this.props.cadeiras).map((periodo)=>
+              this.renderPeriodo(periodo)
+            )}
+            
+            {/* {this.renderPeriod(1)}
 
             <Text style={styles.textStyle}>Optativas</Text>
-            {this.renderPeriod(0)}
+            {this.renderPeriod(0)} */}
           </View>
 
           <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
@@ -99,7 +100,8 @@ class GradeAntigaScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { disciplines: state.disciplines }
-}
+  const { cadeiras } = state.gradeAntiga;
+  return { cadeiras };
+};
 
-export default connect(mapStateToProps)(GradeAntigaScreen);
+export default connect(mapStateToProps, {loadGradeAntiga})(GradeAntigaScreen);
