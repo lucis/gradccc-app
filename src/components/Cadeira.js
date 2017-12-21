@@ -50,7 +50,7 @@ class Cadeira extends Component{
         return (
         <TouchableOpacity onPress={this.selecionou.bind(this)}>
             <View style={(this.state.selecionado) ? styles.containerSelecionado : styles.container}>
-                <Text style={(this.state.selecionado) ? styles.textoSelecionado : styles.texto}>{this.props.nomeCadeira}</Text>
+                <Text style={(this.state.selecionado) ? styles.textoSelecionado : styles.texto}>{this.props.cadeira.nome}</Text>
             </View>
         </TouchableOpacity>);
     };

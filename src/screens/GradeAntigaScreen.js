@@ -61,9 +61,22 @@ class GradeAntigaScreen extends React.Component {
   }
 
   renderPeriodo(periodo) {
+    const cadeiras = this.props.cadeiras[periodo];
+    console.log('Cadeiras');
+    console.log(cadeiras);
     return (
-      <Text style={styles.textStyle}>{periodo}º período</Text>
+      <View>
+        <Text style={styles.textStyle}>{periodo}º período</Text>
+        {this.renderDisciplinas(periodo, cadeiras)}
+      </View>
     )
+  }
+
+  renderDisciplinas(periodo, cadeiras){
+    console.log(cadeiras);
+    return (cadeiras || []).map((cadeira)=>
+      (<Cadeira periodo={periodo} cadeira={cadeira}></Cadeira>) 
+    );
   }
 
   selecionarTudo() {
@@ -77,7 +90,7 @@ class GradeAntigaScreen extends React.Component {
         <Header headerText="Grande antiga" />
         <ScrollView>
           <View style={{padding: 10}}>
-            {Object.keys(this.props.cadeiras).map((periodo)=>
+            {Object.keys(this.props.cadeiras || {}).map((periodo)=>
               this.renderPeriodo(periodo)
             )}
             
