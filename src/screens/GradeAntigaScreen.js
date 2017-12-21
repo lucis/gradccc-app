@@ -73,6 +73,9 @@ class GradeAntigaScreen extends React.Component {
       <View style={styles.container}>
         <Cabecalho texto="Grande antiga" backFunction = {() => this.goToHome()}/>
         <ScrollView>
+          <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
+              <Text style={styles.buttonText}>Selecionar Tudo</Text>
+          </TouchableOpacity>
           <View style={{padding: 10}}>
             <Text style={styles.textStyle}>1º Período</Text>
             {this.gerarPeriodo(1)}
@@ -82,11 +85,7 @@ class GradeAntigaScreen extends React.Component {
 
             <Text style={styles.textStyle}>Optativas</Text>
             {this.gerarPeriodo(0)}
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
-            <Text style={styles.buttonText}>Selecionar Tudo</Text>
-          </TouchableOpacity>
+          </View>          
         </ScrollView>
         <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text style={styles.buttonText}>Migrar</Text>
