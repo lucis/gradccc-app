@@ -1,7 +1,7 @@
 import { LOAD_GRADE_ANTIGA,
         LOAD_GRADE_ANTIGA_FAIL,
         LOAD_GRADE_ANTIGA_SUCCESS,
-        SELECIONA_CADEIRA,
+        TOGGLE_CADEIRA,
         SELECIONA_PERIODO, 
         REALIZA_CONVERSAO,
         REALIZA_CONVERSAO_SUCCESS,
@@ -37,10 +37,16 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false,
                 cadeiras: null
             };
-        case SELECIONA_CADEIRA:
+        case TOGGLE_CADEIRA:
             const { periodo, idCadeira } = action.payload;
+            console.log(periodo, idCadeira);
             const novasCadeiras = {...state.cadeiras};
-            novasCadeiras[periodo][idCadeira].selecionada = true;
+            console.log(novasCadeiras[periodo]);
+            novasCadeiras[periodo].forEach((cadeira)=>{
+                if (cadeira['id_disc'] == idCadeira){
+                    cadeira.selecionada = !cadeira.selecionada;
+                }
+            });
             return {
                 ...state,
                 cadeiras: novasCadeiras

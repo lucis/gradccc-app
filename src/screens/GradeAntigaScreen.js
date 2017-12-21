@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { loadGradeAntiga } from '../actions';
+import { loadGradeAntiga, toggleCadeira } from '../actions';
 
 const styles = StyleSheet.create({
     container:{
@@ -62,8 +62,6 @@ class GradeAntigaScreen extends React.Component {
 
   renderPeriodo(periodo) {
     const cadeiras = this.props.cadeiras[periodo];
-    console.log('Cadeiras');
-    console.log(cadeiras);
     return (
       <View>
         <Text style={styles.textStyle}>{periodo}º período</Text>
@@ -73,11 +71,15 @@ class GradeAntigaScreen extends React.Component {
   }
 
   renderDisciplinas(periodo, cadeiras){
-    console.log(cadeiras);
+    // TODO: Provavelmente corrigir o bind
     return (cadeiras || []).map((cadeira)=>
-      (<Cadeira periodo={periodo} cadeira={cadeira}></Cadeira>) 
+      (<Cadeira periodo={periodo} cadeira={cadeira} selecionar={this.selecionarCadeira.bind(this)}></Cadeira>) 
     );
   }
+
+  selecionarCadeira(periodo, cadeiraId){
+    this.props.toggleCadeira(periodo, cadeiraId);
+  };
 
   selecionarTudo() {
     const { selecionarTudo } = this.state;
@@ -117,4 +119,4 @@ const mapStateToProps = state => {
   return { cadeiras };
 };
 
-export default connect(mapStateToProps, {loadGradeAntiga})(GradeAntigaScreen);
+export default connect(mapStateToProps, {loadGradeAntiga, toggleCadeira})(GradeAntigaScreen);

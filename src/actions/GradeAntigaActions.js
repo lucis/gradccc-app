@@ -1,7 +1,7 @@
 import { LOAD_GRADE_ANTIGA,
     LOAD_GRADE_ANTIGA_FAIL,
     LOAD_GRADE_ANTIGA_SUCCESS,
-    SELECIONA_CADEIRA,
+    TOGGLE_CADEIRA,
     SELECIONA_PERIODO, 
     REALIZA_CONVERSAO,
     REALIZA_CONVERSAO_SUCCESS,
@@ -13,7 +13,7 @@ import axios from 'axios';
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.1.9:5002/antigo')
+        axios.get('http://150.165.98.194:5002/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
@@ -30,5 +30,14 @@ export const loadGradeAntiga = ()=>{
           .catch(function (error) {
             dispatch({type: LOAD_GRADE_ANTIGA_FAIL});
           });
+    };
+};
+
+export const toggleCadeira = (periodo, idCadeira) => {
+    return (dispatch) => {
+        dispatch({
+            type: TOGGLE_CADEIRA,
+            payload: {periodo, idCadeira}
+        });
     };
 };
