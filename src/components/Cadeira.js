@@ -42,15 +42,17 @@ class Cadeira extends Component{
     }
 
     selecionou() {
-        const { selecionado } = this.state;
-        this.setState({selecionado: !selecionado});
+        // const { selecionado } = this.state;
+        // this.setState({selecionado: !selecionado});
+        const { periodo, cadeira } = this.props;
+        this.props.selecionar(periodo, cadeira['id_disc']);
     }
 
     render() {
         return (
         <TouchableOpacity onPress={this.selecionou.bind(this)}>
-            <View style={(this.state.selecionado) ? styles.containerSelecionado : styles.container}>
-                <Text style={(this.state.selecionado) ? styles.textoSelecionado : styles.texto}>{this.props.nomeCadeira}</Text>
+            <View style={(this.props.cadeira.selecionada) ? styles.containerSelecionado : styles.container}>
+                <Text style={(this.props.cadeira.selecionada) ? styles.textoSelecionado : styles.texto}>{this.props.cadeira.nome}</Text>
             </View>
         </TouchableOpacity>);
     };
