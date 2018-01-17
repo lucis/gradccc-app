@@ -36,6 +36,11 @@ class HomeScreen extends React.Component {
     navigate('Feedback');
   }
 
+  goToFAQ() {
+    const {navigate} = this.props.navigation;
+    navigate('FAQ');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -48,6 +53,9 @@ class HomeScreen extends React.Component {
           </Botao>
           <Botao onPress={() => this.goToFeedback()}>
             Feedback
+          </Botao>
+          <Botao onPress={() => this.goToFAQ()}>
+            FAQ
           </Botao>
         </View>
       </View>
