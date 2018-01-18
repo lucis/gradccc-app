@@ -5,7 +5,8 @@ import { LOAD_GRADE_ANTIGA,
         SELECIONA_PERIODO, 
         REALIZA_CONVERSAO,
         REALIZA_CONVERSAO_SUCCESS,
-        REALIZA_CONVERSAO_FAIL
+        REALIZA_CONVERSAO_FAIL,
+        SELECIONA_TODAS_DISCIPLINAS
     } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -51,12 +52,23 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 cadeiras: novasCadeiras
             };
-        case SELECIONA_PERIODO:
-            periodo = action.payload.payload;
+        case SELECIONA_TODAS_DISCIPLINAS:
             novasCadeiras = {...state.cadeiras};
-            novasCadeiras.map(cadeira=>{
+            Object.keys(novasCadeiras).forEach((periodo) => {
+                const cadeirasPorPeriodo = novasCadeiras[periodo];
+                cadeirasPorPeriodo.forEach(cadeira => {
+                    cadeira.selecionada = true;
+                }); 
+            });
+            return {
+                ...state,
+                cadeiras: novasCadeiras
+            };
+        case SELECIONA_PERIODO:
+            periodo = action.payload.periodo;
+            novasCadeiras = {...state.cadeiras};
+            novasCadeiras[periodo].forEach(cadeira => {
                 cadeira.selecionada = true;
-                return cadeira;
             });
             return {
                 ...state,

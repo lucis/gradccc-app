@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { loadGradeAntiga, toggleCadeira } from '../actions';
+import { loadGradeAntiga, toggleCadeira, selecionarTodasAsCadeiras, selecionarTodasAsCadeirasDoPeriodo } from '../actions';
 
 const styles = StyleSheet.create({
     container:{
@@ -82,8 +82,11 @@ class GradeAntigaScreen extends React.Component {
   };
 
   selecionarTudo() {
-    const { selecionarTudo } = this.state;
-    this.setState({selecionarTudo: true});
+    this.props.selecionarTodasAsCadeiras();
+  }
+
+  selecionarCadeirasPorPeriodo() {
+    this.props.selecionarTodasAsCadeirasDoPeriodo(1);
   }
 
   render() {
@@ -103,8 +106,13 @@ class GradeAntigaScreen extends React.Component {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
-            <Text style={styles.buttonText}>Selecionar Tudo</Text>
+            <Text style={styles.buttonText}>Selecionar todas as disciplinas</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={this.selecionarCadeirasPorPeriodo.bind(this)}>
+            <Text style={styles.buttonText}>Selecionar primeiro período</Text>
+          </TouchableOpacity>
+
         </ScrollView>
         <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text style={styles.buttonText}>Migrar</Text>
@@ -119,4 +127,4 @@ const mapStateToProps = state => {
   return { cadeiras };
 };
 
-export default connect(mapStateToProps, {loadGradeAntiga, toggleCadeira})(GradeAntigaScreen);
+export default connect(mapStateToProps, {loadGradeAntiga, toggleCadeira, selecionarTodasAsCadeiras, selecionarTodasAsCadeirasDoPeriodo})(GradeAntigaScreen);
