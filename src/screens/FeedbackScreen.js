@@ -31,10 +31,15 @@ class FeedbackScreen extends React.Component {
         header: null
     };
     
+    goToHome(){
+        const {navigate} = this.props.navigation;
+        navigate('Home');
+    }
+    
     render() {
         return (
             <View style={styles.container}>
-                <Header headerText="Feedback" />
+                <Header headerText="Feedback" backFunction = {() => this.goToHome()} />
                 <View style={styles.content}>
                     <TextInput
                         style = {styles.textarea}

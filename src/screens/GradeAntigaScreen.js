@@ -89,10 +89,15 @@ class GradeAntigaScreen extends React.Component {
     this.props.selecionarTodasAsCadeirasDoPeriodo(1);
   }
 
+  goToHome(){
+    const {navigate} = this.props.navigation;
+    navigate('Home');
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grande antiga" />
+        <Header headerText="Grande antiga" backFunction = {() => this.goToHome()} />
         <ScrollView>
           <View style={{padding: 10}}>
             {Object.keys(this.props.cadeiras || {}).map((periodo)=>
