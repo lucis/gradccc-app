@@ -44,20 +44,6 @@ class GradeAntigaScreen extends React.Component {
 
   componentWillMount(){
     this.props.loadGradeAntiga();
-    this.setState({
-      selecionarTudo: false
-    });
-  }
-
-  goToGradeNova() {
-    const { nav, dispatch } = this.props;
-    const navigateAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'GradeNova' }),
-      ],
-    });
-    dispatch(navigateAction);
   }
 
   renderPeriodo(periodo) {
@@ -94,6 +80,11 @@ class GradeAntigaScreen extends React.Component {
     navigate('Home');
   }
   
+  irParaGradeNova() {
+    const {navigate} = this.props.navigation;
+    navigate('GradeNova');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -103,11 +94,6 @@ class GradeAntigaScreen extends React.Component {
             {Object.keys(this.props.cadeiras || {}).map((periodo)=>
               this.renderPeriodo(periodo)
             )}
-            
-            {/* {this.renderPeriod(1)}
-
-            <Text style={styles.textStyle}>Optativas</Text>
-            {this.renderPeriod(0)} */}
           </View>
 
           <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
@@ -119,9 +105,11 @@ class GradeAntigaScreen extends React.Component {
           </TouchableOpacity>
 
         </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        
+        <TouchableOpacity style={styles.button} onPress={() => this.irParaGradeNova()}>
           <Text style={styles.buttonText}>Migrar</Text>
         </TouchableOpacity>
+
       </View>
     );
   }

@@ -14,7 +14,7 @@ import axios from 'axios';
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.1.19:5002/antigo')
+        axios.get('http://192.168.15.16:5002/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
