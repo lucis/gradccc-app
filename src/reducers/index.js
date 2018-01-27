@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import data from '../data.json';
 import GradeAntigaReducer from './GradeAntigaReducer';
+import GradeNovaReducer from './GradeNovaReducer';
 
 export default combineReducers({
     main: () => null,
-    gradeAntiga: GradeAntigaReducer
+    gradeAntiga: GradeAntigaReducer,
+    gradeNova: GradeNovaReducer
 });

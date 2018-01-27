@@ -8,3 +8,7 @@ export const SELECIONA_TODAS_DISCIPLINAS = '[GradeAntiga] Seleciona Todas as Dis
 export const REALIZA_CONVERSAO = '[GradeAntiga] Realiza Conversão';
 export const REALIZA_CONVERSAO_SUCCESS = '[GradeAntiga] Realiza Conversão Success';
 export const REALIZA_CONVERSAO_FAIL = '[GradeAntiga] Realiza Conversão Fail';
+
+export const LOAD_GRADE_NOVA = '[GradeNova] Load Grade Nova';
+export const LOAD_GRADE_NOVA_SUCCESS = '[GradeNova] Load Grade Nova Success';
+export const LOAD_GRADE_NOVA_FAIL = '[GradeNova] Load Grade Nova Fail';

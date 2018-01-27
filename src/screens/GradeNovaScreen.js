@@ -1,46 +1,113 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { loadGradeNova } from '../actions';
+import Cadeira from '../components/Cadeira';
+import Header from '../components/Header';
+import Button from '../components/Button';
 
 const styles = StyleSheet.create({
-    container:{
-        marginTop: 20,
-        flexDirection: 'row',
-        height: 100
-    },
-    tile: {
-      flex: 0.5,
-      backgroundColor: '#069'
-    }
+  container:{
+      marginTop: 20,
+      flexDirection: 'column',
+      flex: 1
+  },
+  titulo: {
+    fontSize: 25,
+    color: '#111'
+  },
+  textStyle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    alignSelf: 'center'
+  },
+  button: {
+    padding: 20,
+    margin: 10,
+    alignItems: 'center',
+    height: 70,
+    borderWidth: 2, borderColor: '#069',
+    backgroundColor: '#069'
+  },
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+    alignSelf: 'center'
+  }
 });
-class GradeAntigaScreen extends React.Component {
+
+class GradeNovaScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
 
-  goToGradeNova() {
-    const { nav, dispatch } = this.props;
-    const navigateAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'GradeNova' }),
-      ],
+  componentWillMount() {
+    this.props.loadGradeNova();
+  }
+
+  renderPeriodo(periodo) {
+    this.realizaMapeamento();
+    const cadeiras = this.props.cadeirasGradeNova[periodo];
+    return (
+      <View>
+        <Text style={styles.textStyle}>{periodo}º período</Text>
+        {this.renderDisciplinas(periodo, cadeiras)}
+      </View>
+    )
+  }
+
+  renderDisciplinas(periodo, cadeiras){
+    return (cadeiras || []).map((cadeira)=>
+      (<Cadeira periodo={periodo} cadeira={cadeira}></Cadeira>)
+    );
+  }
+
+  goToHome(){
+    const {navigate} = this.props.navigation;
+    navigate('Home');
+  }
+
+  realizaMapeamento() {
+    /*const cadeirasSelecionadas = "";
+    const todasCadeiras = {...this.props.cadeiras};
+    Object.keys(todasCadeiras).forEach((periodo) => {
+      const cadeirasPorPeriodo = todasCadeiras[periodo];
+      cadeirasPorPeriodo.forEach(cadeira => {
+          console.log(cadeira);
+      });
     });
-    dispatch(navigateAction);
+    const requisicao = 'http://192.168.15.16:5002/map?disciplinas=' + cadeirasSelecionadas;
+    axios.get(requisicao)
+          .then(function (response) {
+            
+          })
+          .catch(function (error) {
+          });*/
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.tile}>
-          <Text>Grade Nova</Text>
-        </View>
-        <View style={styles.tile}>
-          Devem ir as cadeiras selecionadas
-        </View>
+        <Header headerText="Grande Nova" backFunction = {() => this.goToHome()} />
+        <ScrollView>
+          <View style={{padding: 10}}>
+            {Object.keys(this.props.cadeirasGradeNova || {}).map((periodo)=>
+              this.renderPeriodo(periodo)
+            )}
+          </View>
+
+        </ScrollView>
       </View>
     );
   }
 }
-export default connect()(GradeAntigaScreen);
+
+const mapStateToProps = state => {
+  const { cadeirasGradeNova } = state.gradeNova;
+  const { cadeiras } = state.gradeAntiga;
+  return { cadeirasGradeNova, cadeiras };
+};
+
+export default connect(mapStateToProps, { loadGradeNova })(GradeNovaScreen);

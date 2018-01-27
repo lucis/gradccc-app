@@ -40,9 +40,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case TOGGLE_CADEIRA:
             const { periodo, idCadeira } = action.payload;
-            console.log(periodo, idCadeira);
             const novasCadeiras = {...state.cadeiras};
-            console.log(novasCadeiras[periodo]);
             novasCadeiras[periodo].forEach((cadeira)=>{
                 if (cadeira['id_disc'] == idCadeira){
                     cadeira.selecionada = !cadeira.selecionada;
