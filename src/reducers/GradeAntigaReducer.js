@@ -65,14 +65,15 @@ export default (state = INITIAL_STATE, action) => {
                 cadeiras: novasCadeiras
             };
         case SELECIONA_PERIODO:
-            periodo = action.payload.periodo;
             novasCadeiras = {...state.cadeiras};
-            novasCadeiras[periodo].forEach(cadeira => {
+            /*const numeroPeriodo = action.payload.periodo;
+            let cadeirasDoPeriodo = novasCadeiras[numeroPeriodo];
+            cadeirasDoPeriodo.forEach(cadeira => {
                 cadeira.selecionada = true;
-            });
+            });*/
             return {
-                ...state,
-                cadeiras: novasCadeiras
+                ...state
+                //cadeiras: novasCadeiras
             };
         default:
             return state;

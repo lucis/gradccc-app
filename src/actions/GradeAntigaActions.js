@@ -14,7 +14,7 @@ import axios from 'axios';
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.1.19:5002/antigo')
+        axios.get('http://192.168.25.32:5002/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
@@ -50,8 +50,10 @@ export const selecionarTodasAsCadeiras = () => {
 };
 
 export const selecionarTodasAsCadeirasDoPeriodo = (periodo) => {
-    return {
-        type: SELECIONA_PERIODO,
-        payload: {periodo}
-    };
+    return (dispatch) => {
+        dispatch({
+            type: SELECIONA_PERIODO,
+            payload: {periodo}
+        });
+    }
 };
