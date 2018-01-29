@@ -6,16 +6,16 @@ import Button from './Button';
 import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, registerUser } from '../actions';
+import { newEmailChanged, newPasswordChanged, registerUser } from '../actions';
 
 class CadastroForm extends Component
 {
     onEmailChange(text){
-        this.props.emailChanged(text);
+        this.props.newEmailChanged(text);
     };
 
     onPasswordChange(text){
-        this.props.passwordChanged(text);
+        this.props.newPasswordChanged(text);
     };
 
     onButtonPress(){
@@ -84,4 +84,4 @@ const mapStateToProps = state => {
     return{ email, password, error, loading };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, registerUser })(CadastroForm);
+export default connect(mapStateToProps, { newEmailChanged, newPasswordChanged, registerUser })(CadastroForm);
