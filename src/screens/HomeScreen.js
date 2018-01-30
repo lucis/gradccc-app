@@ -39,6 +39,11 @@ class HomeScreen extends React.Component {
     navigate('Feedback');
   }
 
+  goToFAQ() {
+    const {navigate} = this.props.navigation;
+    navigate('FAQ');
+  }
+
   goToLogin() {
     const {navigate} = this.props.navigation;
     navigate('Login');
@@ -74,6 +79,9 @@ class HomeScreen extends React.Component {
           {this.renderLoginButton()}
           <Button onPress={() => this.goToFeedback()}>
             Feedback
+          </Button>
+          <Button onPress={() => this.goToFAQ()}>
+            FAQ
           </Button>
         </View>
       </View>
