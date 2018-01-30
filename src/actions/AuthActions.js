@@ -43,11 +43,6 @@ const loginUserFail = (dispatch) => {
     dispatch({ type: LOGIN_FAIL });
 }
 
-const goToHome = (dispatch) => {
-  console.log('################################################################');
-  dispatch(NavigationActions.navigate({ routeName: 'Home' }));
-}
-
 const loginUserSuccess = (dispatch, user) => {
     dispatch({ type: LOGIN_SUCCESS,
                   payload: user});

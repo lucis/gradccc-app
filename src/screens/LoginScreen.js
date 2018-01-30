@@ -7,6 +7,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import LoginForm from '../components/LoginForm';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { NavigationActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container:{
@@ -41,18 +42,25 @@ class LoginScreen extends React.Component {
   goToCadastro() {
     const {navigate} = this.props.navigation;
     navigate('Cadastro');
-  }
+  };
 
   goToHome(){
     const {navigate} = this.props.navigation;
     navigate('Home');
-  }
+  };
+
+  redirecionarAposSucesso(){
+    if(this.props.auth.user!=null){
+      this.goToHome();
+    }
+  };
 
   render() {
     return (
         <View style={styles.container}>
-            <Header headerText="GradCCC" />
+            <Header headerText="Login" />
             <LoginForm />
+            {this.redirecionarAposSucesso()}
             <View style={styles.screenContent}>
                 <TouchableOpacity onPress={() => this.goToCadastro()}
                                 style={styles.buttonStyle}>
@@ -66,4 +74,8 @@ class LoginScreen extends React.Component {
   };
 };
 
-export default connect()(LoginScreen);
+const mapStateToProps = state => {
+  return { auth: state.auth }
+}
+
+export default connect(mapStateToProps)(LoginScreen);

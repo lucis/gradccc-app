@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { NavigationActions } from 'react-navigation';
 import { NEW_EMAIL_CHANGED,
         NEW_PASSWORD_CHANGED,
         REGISTER_USER,
@@ -28,11 +27,6 @@ export const registerUser = ({ email, password }) => {
             .then(user => registerUserSuccess(dispatch, user))
             .catch(() => registerUserFail(dispatch));
     }
-}
-
-const goToHome = (dispatch) => {
-  console.log('################################################################');
-  dispatch(NavigationActions.navigate({ routeName: 'Home' }));
 }
 
 const registerUserFail = (dispatch) => {

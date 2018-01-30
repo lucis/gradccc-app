@@ -7,6 +7,7 @@ import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { NavigationActions } from 'react-navigation';
 
 class LoginForm extends Component
 {

@@ -3,7 +3,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from '../reducers';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import CadastroForm from '../components/CadastroForm';
 import Header from '../components/Header';
@@ -25,14 +25,36 @@ class CadastroScreen extends React.Component {
     header: null
   };
 
+  goToLogin(){
+    const {navigate} = this.props.navigation;
+
+    Alert.alert('Conta criada com sucesso!',
+                'Você será redirecionado para a página de login.',
+                [{text: 'Ok', onPress: () => navigate('Login')}],
+                { cancelable: false }
+    );
+  };
+
+  redirecionarAposSucesso(){
+    if(this.props.cadastro.user!=null){
+      this.props.cadastro.user = null;
+      this.goToLogin();
+    }
+  };
+
   render() {
     return (
         <View style={styles.container}>
-            <Header headerText="GradCCC" />
+            <Header headerText="Cadastro" />
             <CadastroForm />
-        </View>   
+            {this.redirecionarAposSucesso()}
+        </View>
     );
   };
 };
 
-export default connect()(CadastroScreen);
+const mapStateToProps = state => {
+  return { cadastro: state.cadastro }
+}
+
+export default connect(mapStateToProps)(CadastroScreen);
