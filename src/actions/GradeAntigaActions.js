@@ -2,7 +2,7 @@ import { LOAD_GRADE_ANTIGA,
     LOAD_GRADE_ANTIGA_FAIL,
     LOAD_GRADE_ANTIGA_SUCCESS,
     TOGGLE_CADEIRA,
-    SELECIONA_PERIODO, 
+    SELECIONA_PERIODO,
     REALIZA_CONVERSAO,
     REALIZA_CONVERSAO_SUCCESS,
     REALIZA_CONVERSAO_FAIL,
@@ -11,20 +11,27 @@ import { LOAD_GRADE_ANTIGA,
 
 import axios from 'axios';
 
+const limitarOptativas = (cadeira) => {
+  return (cadeira.categoria!='Optativa' ||
+    (cadeira.categoria=='Optativa' && (cadeira.id_disc=='103' || cadeira.id_disc=='104')));
+}
+
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.25.32:5002/antigo')
+        axios.get('http://192.168.15.3:5002/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
 
             Object.keys(cadeiras).forEach((id)=>{
                 const cadeira = cadeiras[id];
-                if (!mapaCadeiras[cadeira.periodo]){
-                    mapaCadeiras[cadeira.periodo] = [];
+                if(limitarOptativas(cadeira)){
+                    if (!mapaCadeiras[cadeira.periodo]){
+                        mapaCadeiras[cadeira.periodo] = [];
+                    }
+                    mapaCadeiras[cadeira.periodo].push(cadeira);
                 }
-                mapaCadeiras[cadeira.periodo].push(cadeira);
             });
             dispatch({type: LOAD_GRADE_ANTIGA_SUCCESS, payload: mapaCadeiras});
           })

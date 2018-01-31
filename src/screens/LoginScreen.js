@@ -58,7 +58,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-            <Header headerText="Login" />
+            <Header headerText="Login" backFunction = {() => this.goToHome()} />
             <LoginForm />
             {this.redirecionarAposSucesso()}
             <View style={styles.screenContent}>

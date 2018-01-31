@@ -8,7 +8,7 @@ import axios from 'axios';
 export const loadGradeNova = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_NOVA});
-        axios.get('http://192.168.15.16:5002/novo')
+        axios.get('http://192.168.15.3:5002/novo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};

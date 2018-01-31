@@ -48,10 +48,11 @@ class GradeAntigaScreen extends React.Component {
 
   renderPeriodo(periodo) {
     const cadeiras = this.props.cadeiras[periodo];
+    const label = periodo=='*' ? 'Optativas' : periodo + 'º período';
     return (
       <View>
         <TouchableOpacity onPress={this.selecionarCadeirasPorPeriodo(periodo)}>
-          <Text style={styles.textStyle}>{periodo}º período</Text>
+          <Text style={styles.textStyle}>{label}</Text>
         </TouchableOpacity>
         {this.renderDisciplinas(periodo, cadeiras)}
       </View>
@@ -61,7 +62,7 @@ class GradeAntigaScreen extends React.Component {
   renderDisciplinas(periodo, cadeiras){
     // TODO: Provavelmente corrigir o bind
     return (cadeiras || []).map((cadeira)=>
-      (<Cadeira periodo={periodo} cadeira={cadeira} selecionar={this.selecionarCadeira.bind(this)}></Cadeira>) 
+      (<Cadeira periodo={periodo} cadeira={cadeira} selecionar={this.selecionarCadeira.bind(this)}></Cadeira>)
     );
   }
 
@@ -81,7 +82,7 @@ class GradeAntigaScreen extends React.Component {
     const {navigate} = this.props.navigation;
     navigate('Home');
   }
-  
+
   irParaGradeNova() {
     const {navigate} = this.props.navigation;
     navigate('GradeNova');
@@ -92,18 +93,19 @@ class GradeAntigaScreen extends React.Component {
       <View style={styles.container}>
         <Header headerText="Grande antiga" backFunction = {() => this.goToHome()} />
         <ScrollView>
-          <View style={{padding: 10}}>
-            {Object.keys(this.props.cadeiras || {}).map((periodo)=>
-              this.renderPeriodo(periodo)
-            )}
-          </View>
 
-          <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
-            <Text style={styles.buttonText}>Selecionar todas as disciplinas</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
+          <Text style={styles.buttonText}>Selecionar tudo</Text>
+        </TouchableOpacity>
+
+        <View style={{padding: 10}}>
+          {Object.keys(this.props.cadeiras || {}).map((periodo)=>
+            this.renderPeriodo(periodo)
+          )}
+        </View>
 
         </ScrollView>
-        
+
         <TouchableOpacity style={styles.button} onPress={() => this.irParaGradeNova()}>
           <Text style={styles.buttonText}>Migrar</Text>
         </TouchableOpacity>

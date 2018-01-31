@@ -42,10 +42,15 @@ class CadastroScreen extends React.Component {
     }
   };
 
+  goToLogin(){
+    const {navigate} = this.props.navigation;
+    navigate('Login');
+  };
+
   render() {
     return (
         <View style={styles.container}>
-            <Header headerText="Cadastro" />
+            <Header headerText="Cadastro" backFunction = {() => this.goToLogin()} />
             <CadastroForm />
             {this.redirecionarAposSucesso()}
         </View>

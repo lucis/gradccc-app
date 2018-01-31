@@ -81,7 +81,7 @@ class GradeNovaScreen extends React.Component {
     const requisicao = 'http://192.168.15.16:5002/map?disciplinas=' + cadeirasSelecionadas;
     axios.get(requisicao)
           .then(function (response) {
-            
+
           })
           .catch(function (error) {
           });*/
