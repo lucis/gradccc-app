@@ -64,14 +64,14 @@ export default (state = INITIAL_STATE, action) => {
             };
         case SELECIONA_PERIODO:
             novasCadeiras = {...state.cadeiras};
-            /*const numeroPeriodo = action.payload.periodo;
+            const numeroPeriodo = action.payload.periodo;
             let cadeirasDoPeriodo = novasCadeiras[numeroPeriodo];
             cadeirasDoPeriodo.forEach(cadeira => {
                 cadeira.selecionada = true;
-            });*/
+            });
             return {
-                ...state
-                //cadeiras: novasCadeiras
+                ...state,
+                cadeiras: novasCadeiras
             };
         default:
             return state;

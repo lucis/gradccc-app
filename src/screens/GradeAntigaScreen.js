@@ -50,7 +50,7 @@ class GradeAntigaScreen extends React.Component {
     const cadeiras = this.props.cadeiras[periodo];
     return (
       <View>
-        <TouchableOpacity onPress={this.selecionarCadeirasPorPeriodo(periodo)}>
+        <TouchableOpacity onPress={ () => this.selecionarCadeirasPorPeriodo(periodo) }>
           <Text style={styles.textStyle}>{periodo}º período</Text>
         </TouchableOpacity>
         {this.renderDisciplinas(periodo, cadeiras)}
@@ -74,7 +74,8 @@ class GradeAntigaScreen extends React.Component {
   }
 
   selecionarCadeirasPorPeriodo(periodo) {
-    this.props.selecionarTodasAsCadeirasDoPeriodo(periodo);
+    const numeroPeriodo = parseInt(periodo);
+    this.props.selecionarTodasAsCadeirasDoPeriodo(numeroPeriodo);
   }
 
   goToHome(){
