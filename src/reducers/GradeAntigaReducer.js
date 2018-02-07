@@ -12,7 +12,8 @@ import { LOAD_GRADE_ANTIGA,
 const INITIAL_STATE = {
     loading: false,
     loaded: false,
-    cadeiras: null
+    cadeiras: null,
+    idCadeirasSelecionadas: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,37 +42,56 @@ export default (state = INITIAL_STATE, action) => {
         case TOGGLE_CADEIRA:
             const { periodo, idCadeira } = action.payload;
             const novasCadeiras = {...state.cadeiras};
+            let novasCadeirasSelecionadas = [...state.idCadeirasSelecionadas];
             novasCadeiras[periodo].forEach((cadeira)=>{
                 if (cadeira['id_disc'] == idCadeira){
                     cadeira.selecionada = !cadeira.selecionada;
+
+                    if(novasCadeirasSelecionadas.includes(cadeira['id_disc'])){
+                        const indexCadeira = novasCadeirasSelecionadas.indexOf(cadeira['id_disc']);
+                        novasCadeirasSelecionadas.splice(indexCadeira, 1);
+                    } else {
+                        novasCadeirasSelecionadas.push(cadeira['id_disc']);
+                    } 
                 }
             });
             return {
                 ...state,
-                cadeiras: novasCadeiras
+                cadeiras: novasCadeiras,
+                idCadeirasSelecionadas: novasCadeirasSelecionadas
             };
         case SELECIONA_TODAS_DISCIPLINAS:
             novasCadeiras = {...state.cadeiras};
+            novasCadeirasSelecionadas = [...state.idCadeirasSelecionadas];
+
             Object.keys(novasCadeiras).forEach((periodo) => {
                 const cadeirasPorPeriodo = novasCadeiras[periodo];
                 cadeirasPorPeriodo.forEach(cadeira => {
                     cadeira.selecionada = true;
+                    if(!novasCadeirasSelecionadas.includes(cadeira['id_disc']))
+                        novasCadeirasSelecionadas.push(cadeira['id_disc']);
                 }); 
             });
             return {
                 ...state,
-                cadeiras: novasCadeiras
+                cadeiras: novasCadeiras,
+                idCadeirasSelecionadas: novasCadeirasSelecionadas
             };
         case SELECIONA_PERIODO:
             novasCadeiras = {...state.cadeiras};
+            novasCadeirasSelecionadas = [...state.idCadeirasSelecionadas];
             const numeroPeriodo = action.payload.periodo;
             let cadeirasDoPeriodo = novasCadeiras[numeroPeriodo];
+            
             cadeirasDoPeriodo.forEach(cadeira => {
                 cadeira.selecionada = true;
+                if(!novasCadeirasSelecionadas.includes(cadeira['id_disc']))
+                    novasCadeirasSelecionadas.push(cadeira['id_disc']);
             });
             return {
                 ...state,
-                cadeiras: novasCadeiras
+                cadeiras: novasCadeiras,
+                idCadeirasSelecionadas: novasCadeirasSelecionadas
             };
         default:
             return state;

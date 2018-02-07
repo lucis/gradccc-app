@@ -12,6 +12,7 @@ export const REALIZA_CONVERSAO_FAIL = '[GradeAntiga] Realiza Conversão Fail';
 export const LOAD_GRADE_NOVA = '[GradeNova] Load Grade Nova';
 export const LOAD_GRADE_NOVA_SUCCESS = '[GradeNova] Load Grade Nova Success';
 export const LOAD_GRADE_NOVA_FAIL = '[GradeNova] Load Grade Nova Fail';
+export const MAPEAR_GRADE_NOVA = '[GradeNova] Mapear Grade Nova'
 
 export const EMAIL_CHANGED = 'email_changed';
 export const PASSWORD_CHANGED = 'password_changed';
