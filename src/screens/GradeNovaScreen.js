@@ -7,6 +7,7 @@ import { loadGradeNova } from '../actions';
 import Cadeira from '../components/Cadeira';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import CadeiraNovaGrade from '../components/CadeiraNovaGrade';
 
 const styles = StyleSheet.create({
   container:{
@@ -60,7 +61,7 @@ class GradeNovaScreen extends React.Component {
 
   renderDisciplinas(periodo, cadeiras){
     return (cadeiras || []).map((cadeira)=>
-      (<Cadeira periodo={periodo} cadeira={cadeira}></Cadeira>)
+      (<CadeiraNovaGrade periodo={periodo} cadeira={cadeira}></CadeiraNovaGrade>)
     );
   }
 

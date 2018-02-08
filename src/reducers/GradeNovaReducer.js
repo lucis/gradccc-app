@@ -36,7 +36,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case MAPEAR_GRADE_NOVA:
             const idCadeiras = action.payload.idCadeiras;
-            let cadeirasNovaGrade = {...cadeirasGradeNova};
+            let cadeirasNovaGrade = {...state.cadeirasGradeNova};
 
             axios.get('http://192.168.25.32:5002/map?disciplinas='+idCadeiras.join(","))
                 .then( function(response){
