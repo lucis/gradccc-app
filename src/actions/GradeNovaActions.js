@@ -9,23 +9,36 @@ import axios from 'axios';
 export const loadGradeNova = (idCadeiras)=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_NOVA});
-        axios.get('http://192.168.25.32:5002/novo')
+        const url = "http://192.168.15.13:5002";
+        axios.get(url + '/novo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
-
             Object.keys(cadeiras).forEach((id)=>{
                 const cadeira = cadeiras[id];
                 if (!mapaCadeiras[cadeira.periodo]){
                     mapaCadeiras[cadeira.periodo] = [];
                 }
-                mapaCadeiras[cadeira.periodo].push(cadeira);
+                if(cadeira.nome !== "Optativa Geral" && cadeira.nome !== "Optativa Específica") {
+                    mapaCadeiras[cadeira.periodo].push(cadeira);
+                }
             });
-            dispatch({type: LOAD_GRADE_NOVA_SUCCESS, payload: mapaCadeiras});
-            dispatch({
-                type: MAPEAR_GRADE_NOVA,
-                payload: {idCadeiras}
-            });
+            axios.get(url + '/map?disciplinas=' + idCadeiras.join(","))
+                .then( function(response) {
+                    const cadeirasMapeadas = response.data;
+                    cadeirasMapeadas.forEach(cadeira => {
+                        let nomeCadeira = cadeira.nome_novo;
+                        mapaCadeiras[cadeira.periodo_novo].forEach((novaCadeira) => {
+                            if(novaCadeira.nome === nomeCadeira) {
+                                novaCadeira.selecionada = true;
+                            }
+                        });
+                    });
+                    dispatch({type: LOAD_GRADE_NOVA_SUCCESS, payload: mapaCadeiras});
+                })
+                .catch( function(error){
+                    dispatch({type: LOAD_GRADE_NOVA_FAIL});
+                });
           })
           .catch(function (error) {
             dispatch({type: LOAD_GRADE_NOVA_FAIL});

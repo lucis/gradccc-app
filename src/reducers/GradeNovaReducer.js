@@ -34,28 +34,6 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false,
                 cadeirasGradeNova: null
             };
-        case MAPEAR_GRADE_NOVA:
-            const idCadeiras = action.payload.idCadeiras;
-            let cadeirasNovaGrade = {...state.cadeirasGradeNova};
-
-            axios.get('http://192.168.25.32:5002/map?disciplinas='+idCadeiras.join(","))
-                .then( function(response){
-                    const cadeirasMapeadas = response.data;
-                    cadeirasMapeadas.forEach(cadeira => {
-                        let nomeCadeira = cadeira.nome_novo;
-                        cadeirasNovaGrade.forEach(novaCadeira => {
-                            if(novaCadeira.nome === nomeCadeira) novaCadeira.selecionada = true
-                        });
-                    });
-                })
-                .catch( function(error){
-                    //TODO
-                });
-
-            return {
-                ...state,
-                cadeirasGradeNova: cadeirasNovaGrade
-            };
         default:
             return state;
     }

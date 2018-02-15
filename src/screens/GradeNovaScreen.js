@@ -49,19 +49,18 @@ class GradeNovaScreen extends React.Component {
   }
 
   renderPeriodo(periodo) {
-    //this.realizaMapeamento();
     const cadeiras = this.props.cadeirasGradeNova[periodo];
     return (
       <View>
-        <Text style={styles.textStyle}>{periodo}º período</Text>
+        <Text style={styles.textStyle}>{periodo === "*" ? "Optativas" : `${periodo}º período`}</Text>
         {this.renderDisciplinas(periodo, cadeiras)}
       </View>
     )
   }
 
   renderDisciplinas(periodo, cadeiras){
-    return (cadeiras || []).map((cadeira)=>
-      (<CadeiraNovaGrade periodo={periodo} cadeira={cadeira}></CadeiraNovaGrade>)
+    return (cadeiras || []).filter(cadeira => (periodo === "*" && cadeira.selecionada || periodo !== "*"))
+                          .map((cadeira) => (<CadeiraNovaGrade periodo={periodo} cadeira={cadeira}></CadeiraNovaGrade>)
     );
   }
 
