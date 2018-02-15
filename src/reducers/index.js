@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import GradeAntigaReducer from './GradeAntigaReducer';
 import GradeNovaReducer from './GradeNovaReducer';
 import CadastroReducer from './CadastroReducer';
+import FAQReducer from './FAQReducer';
+import SelecaoReducer from './SelecaoReducer';
 import AuthReducer from './AuthReducer';
 
 export default combineReducers({
@@ -9,5 +11,7 @@ export default combineReducers({
     gradeAntiga: GradeAntigaReducer,
     gradeNova: GradeNovaReducer,
     auth: AuthReducer,
-    cadastro: CadastroReducer
+    cadastro: CadastroReducer,
+    faq: FAQReducer,
+    selecionado: SelecaoReducer
 });

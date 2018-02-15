@@ -3,6 +3,8 @@ import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import ListaDePerguntas from '../components/ListaDePerguntas';
+
 
 const styles = StyleSheet.create({
     container:{
@@ -56,6 +58,7 @@ class FAQScreen extends React.Component {
                     Acesse as perguntas frequentes e tire suas dúvidas sobre o 
                     Novo Curso de Ciência da Computação da UFCG
                      </Text>
+                     <ListaDePerguntas />
                 </View>
             </View> 
         );

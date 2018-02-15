@@ -1,0 +1,12 @@
+[
+	{
+		"id":0,
+		"questao":"o que estamos tratando nesse FAQ?",
+		"resposta":"Do novo Projeto Pedagógico do Curso de Ciência da Computação (PPC). O novo PPC está descrito neste documento e detalha aspectos como as decisões institucionais que levaram à reformulação, as disciplinas pertencentes ao novo plano e a execução curricular sugerida pela coordenação. A partir de agora, vamos nos referir ao novo PPC como Novo Curso."
+	},
+	{
+		"id":1,
+		"questao":"Qual é o novo fluxograma?",
+		"resposta":"O fluxograma do novo curso está disponível no Cursos UFCG. Há também uma versão para impressão."
+	}
+]
