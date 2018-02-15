@@ -51,10 +51,11 @@ class GradeAntigaScreen extends React.Component {
     const label = periodo=='*' ? 'Optativas' : periodo + 'º período';
     return (
       <View>
+
         <TouchableOpacity onPress={this.selecionarCadeirasPorPeriodo(periodo)}>
           <Text style={styles.textStyle}>{label}</Text>
+          {this.renderDisciplinas(periodo, cadeiras)}
         </TouchableOpacity>
-        {this.renderDisciplinas(periodo, cadeiras)}
       </View>
     )
   }
@@ -75,7 +76,8 @@ class GradeAntigaScreen extends React.Component {
   }
 
   selecionarCadeirasPorPeriodo(periodo) {
-    this.props.selecionarTodasAsCadeirasDoPeriodo(periodo);
+    const numeroPeriodo = parseInt(periodo);
+    this.props.selecionarTodasAsCadeirasDoPeriodo(numeroPeriodo);
   }
 
   goToHome(){

@@ -1,7 +1,10 @@
 import { LOAD_GRADE_NOVA,
     LOAD_GRADE_NOVA_FAIL,
-    LOAD_GRADE_NOVA_SUCCESS
+    LOAD_GRADE_NOVA_SUCCESS,
+    MAPEAR_GRADE_NOVA
 } from '../actions/types';
+
+import axios from 'axios';
 
 const INITIAL_STATE = {
     loading: false,

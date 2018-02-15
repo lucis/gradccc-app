@@ -1,26 +1,45 @@
 import { LOAD_GRADE_NOVA,
          LOAD_GRADE_NOVA_SUCCESS,
-         LOAD_GRADE_NOVA_FAIL
+         LOAD_GRADE_NOVA_FAIL,
+         MAPEAR_GRADE_NOVA
 } from '../actions/types';
 
 import axios from 'axios';
 
-export const loadGradeNova = ()=>{
+export const loadGradeNova = (idCadeiras)=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_NOVA});
-        axios.get('http://192.168.15.3:5002/novo')
+
+        const url = "http://192.168.15.13:5002";
+        axios.get(url + '/novo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
-
             Object.keys(cadeiras).forEach((id)=>{
                 const cadeira = cadeiras[id];
                 if (!mapaCadeiras[cadeira.periodo]){
                     mapaCadeiras[cadeira.periodo] = [];
                 }
-                mapaCadeiras[cadeira.periodo].push(cadeira);
+                if(cadeira.nome !== "Optativa Geral" && cadeira.nome !== "Optativa Específica") {
+                    mapaCadeiras[cadeira.periodo].push(cadeira);
+                }
             });
-            dispatch({type: LOAD_GRADE_NOVA_SUCCESS, payload: mapaCadeiras});
+            axios.get(url + '/map?disciplinas=' + idCadeiras.join(","))
+                .then( function(response) {
+                    const cadeirasMapeadas = response.data;
+                    cadeirasMapeadas.forEach(cadeira => {
+                        let nomeCadeira = cadeira.nome_novo;
+                        mapaCadeiras[cadeira.periodo_novo].forEach((novaCadeira) => {
+                            if(novaCadeira.nome === nomeCadeira) {
+                                novaCadeira.selecionada = true;
+                            }
+                        });
+                    });
+                    dispatch({type: LOAD_GRADE_NOVA_SUCCESS, payload: mapaCadeiras});
+                })
+                .catch( function(error){
+                    dispatch({type: LOAD_GRADE_NOVA_FAIL});
+                });
           })
           .catch(function (error) {
             dispatch({type: LOAD_GRADE_NOVA_FAIL});
