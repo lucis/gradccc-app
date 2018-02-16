@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CadeiraNovaGrande not selected renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#d6d7da",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "height": 70,
+      "margin": 10,
+      "padding": 20,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "fontSize": 20,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`CadeiraNovaGrande selected renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#d6d7da",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "height": 70,
+      "margin": 10,
+      "padding": 20,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "fontSize": 20,
+      }
+    }
+  />
+</View>
+`;

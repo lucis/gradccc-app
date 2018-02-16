@@ -19,7 +19,7 @@ const limitarOptativas = (cadeira) => {
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.15.13:5002/antigo')
+        axios.get('http://192.168.131.77:5002/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};

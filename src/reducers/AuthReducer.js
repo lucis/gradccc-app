@@ -11,7 +11,7 @@ const INITIAL_STATE = { email: '',
                     user: null,
                     loading: false};
 
-export default (state = INITIAL_STATE, action) =>
+export default function request(state = INITIAL_STATE, action)
 {
     switch(action.type){
         case EMAIL_CHANGED:
