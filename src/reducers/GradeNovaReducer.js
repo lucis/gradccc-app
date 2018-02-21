@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     cadeirasGradeNova: null
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default function request(state = INITIAL_STATE, action)  {
     switch (action.type){
         case LOAD_GRADE_NOVA:
             return {
