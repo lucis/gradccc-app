@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class Pergunta extends Component{
     renderResposta(){
-
+        console.log("Aqui:" + pergunta.resposta)
         const {pergunta, idPerguntaSelecionada} = this.props;
         if(pergunta.id === idPerguntaSelecionada){
             return (
@@ -18,7 +18,6 @@ class Pergunta extends Component{
     render (){
         const {titleStyle} = styles;
         const { id, questao } = this.props.pergunta;
-        console.log(this.props.pergunta)
         return (
             <TouchableWithoutFeedback onPress={() => this.props.selecionaPergunta(id)}>
                 <View>
