@@ -93,7 +93,7 @@ class GradeAntigaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grande antiga" backFunction = {() => this.goToHome()} />
+        <Header headerText="Grade antiga" backFunction = {() => this.goToHome()} />
         <ScrollView>
 
         <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>

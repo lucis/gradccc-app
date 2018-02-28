@@ -91,7 +91,7 @@ class GradeNovaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grande Nova" backFunction = {() => this.goToHome()} />
+        <Header headerText="Grade Nova" backFunction = {() => this.goToHome()} />
         <ScrollView>
           <View style={{padding: 10}}>
             {Object.keys(this.props.cadeirasGradeNova || {}).map((periodo)=>
