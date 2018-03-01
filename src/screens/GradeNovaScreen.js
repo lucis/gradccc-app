@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from 'firebase';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -46,6 +47,12 @@ class GradeNovaScreen extends React.Component {
 
   componentWillMount() {
     this.props.loadGradeNova(this.props.idCadeirasSelecionadas);
+    const { currentUser } = firebase.auth();
+
+    if(currentUser){
+        firebase.database().ref(`/users/${currentUser.uid}/cadeiras_selecionadas`)
+            .set(this.props.idCadeirasSelecionadas);
+    }
   }
 
   renderPeriodo(periodo) {

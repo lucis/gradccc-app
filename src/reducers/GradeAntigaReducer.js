@@ -8,6 +8,7 @@ import { LOAD_GRADE_ANTIGA,
         REALIZA_CONVERSAO_FAIL,
         SELECIONA_TODAS_DISCIPLINAS
     } from '../actions/types';
+import firebase from 'firebase';
 
 const INITIAL_STATE = {
     loading: false,
@@ -26,11 +27,37 @@ export default (state = INITIAL_STATE, action) => {
                 loaded: false
             };
         case LOAD_GRADE_ANTIGA_SUCCESS:
+            const { currentUser } = firebase.auth();
+            console.log("USEEEEEERRRRRRRRRRRRRRR");
+            console.log(currentUser);
+            let novasCadeiras = action.payload;
+            let novasCadeirasSelecionadas = [];
+
+            if(currentUser){
+                firebase.database().ref(`/users/${currentUser.uid}/cadeiras_selecionadas`)
+                    .on('value', data => {
+                        if(data.val()){
+                            for(var i = 0; i<data.val().length; i++){
+                                novasCadeirasSelecionadas.push(data.val()[i]);
+                            }
+
+                            Object.keys(novasCadeiras).forEach((periodo)=>{
+                                for(var i = 0; i<novasCadeiras[periodo].length; i++){
+                                    if (novasCadeirasSelecionadas.includes(novasCadeiras[periodo][i].id_disc)){
+                                        novasCadeiras[periodo][i].selecionada = true;
+                                    }
+                                }
+                            })
+                        }
+                    });
+            }
+
             return {
                 ...state,
                 loaded: true,
                 loading: false,
-                cadeiras: action.payload
+                cadeiras: novasCadeiras,
+                idCadeirasSelecionadas: novasCadeirasSelecionadas
             };
         case LOAD_GRADE_ANTIGA_FAIL:
             return {
@@ -41,8 +68,8 @@ export default (state = INITIAL_STATE, action) => {
             };
         case TOGGLE_CADEIRA:
             const { periodo, idCadeira } = action.payload;
-            const novasCadeiras = {...state.cadeiras};
-            let novasCadeirasSelecionadas = [...state.idCadeirasSelecionadas];
+            novasCadeiras = {...state.cadeiras};
+            novasCadeirasSelecionadas = [...state.idCadeirasSelecionadas];
             novasCadeiras[periodo].forEach((cadeira)=>{
                 if (cadeira['id_disc'] == idCadeira){
                     cadeira.selecionada = !cadeira.selecionada;

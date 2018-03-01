@@ -20,6 +20,7 @@ export default class App extends React.Component {
       };
 
       firebase.initializeApp(config);
+      firebase.auth().signOut();
   }
 
   render() {

@@ -4,6 +4,7 @@ import { EMAIL_CHANGED,
     LOGIN_FAIL,
     LOGIN_USER,
     LOGOUT_USER } from '../actions/types';
+import firebase from 'firebase';
 
 const INITIAL_STATE = { email: '',
                     password: '',
@@ -26,6 +27,7 @@ export default (state = INITIAL_STATE, action) =>
             return { ...state, loading: false,
                     error: 'Authentication Failed.', password: '' };
         case LOGOUT_USER:
+            firebase.auth().signOut();
             return { ...state, user: action.payload };
         default:
             return state;
