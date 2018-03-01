@@ -48,14 +48,13 @@ class GradeAntigaScreen extends React.Component {
 
   renderPeriodo(periodo) {
     const cadeiras = this.props.cadeiras[periodo];
-    const label = periodo=='*' ? 'Optativas' : periodo + 'º período';
+    var label = periodo=='*' ? 'Optativas' : periodo + 'º período';
     return (
       <View>
-
-        <TouchableOpacity onPress={this.selecionarCadeirasPorPeriodo(periodo)}>
-          <Text style={styles.textStyle}>{label}</Text>
+          <TouchableOpacity onPress={ () => this.selecionarCadeirasPorPeriodo(periodo) }>
+              <Text style={styles.textStyle}>{label}</Text>
+          </TouchableOpacity>
           {this.renderDisciplinas(periodo, cadeiras)}
-        </TouchableOpacity>
       </View>
     )
   }
@@ -93,7 +92,7 @@ class GradeAntigaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grande antiga" backFunction = {() => this.goToHome()} />
+        <Header headerText="Grade antiga" backFunction = {() => this.goToHome()} />
         <ScrollView>
 
         <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
