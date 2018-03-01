@@ -5,6 +5,7 @@ import CadastroReducer from './CadastroReducer';
 import FAQReducer from './FAQReducer';
 import SelecaoReducer from './SelecaoReducer';
 import AuthReducer from './AuthReducer';
+import EstatisticasReducer from './EstatisticasReducer';
 
 export default combineReducers({
     main: () => null,
@@ -13,5 +14,6 @@ export default combineReducers({
     auth: AuthReducer,
     cadastro: CadastroReducer,
     faq: FAQReducer,
-    selecionado: SelecaoReducer
+    selecionado: SelecaoReducer,
+    estatisticas: EstatisticasReducer
 });

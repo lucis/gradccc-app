@@ -10,7 +10,7 @@ export const loadGradeNova = (idCadeiras)=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_NOVA});
 
-        const url = "http://192.168.15.13:5002";
+        const url = "http://192.168.25.32:5002";
         axios.get(url + '/novo')
           .then(function (response) {
             const cadeiras = response.data;

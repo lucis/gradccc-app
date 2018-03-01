@@ -28,3 +28,5 @@ export const REGISTER_SUCCESS = 'register_success';
 export const REGISTER_FAIL = 'register_fail';
 
 export const PERGUNTA_SELECIONADA = 'pergunta_selecionada';
+
+export const CALCULAR_CREDITOS_OBRIGATORIOS = '[Estatisticas] Calcular Creditos Obrigatorios'

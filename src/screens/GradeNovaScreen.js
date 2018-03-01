@@ -76,23 +76,9 @@ class GradeNovaScreen extends React.Component {
     navigate('Home');
   }
 
-
-  realizaMapeamento() {
-    /*const cadeirasSelecionadas = "";
-    const todasCadeiras = {...this.props.cadeiras};
-    Object.keys(todasCadeiras).forEach((periodo) => {
-      const cadeirasPorPeriodo = todasCadeiras[periodo];
-      cadeirasPorPeriodo.forEach(cadeira => {
-          console.log(cadeira);
-      });
-    });
-    const requisicao = 'http://192.168.15.16:5002/map?disciplinas=' + cadeirasSelecionadas;
-    axios.get(requisicao)
-          .then(function (response) {
-
-          })
-          .catch(function (error) {
-          });*/
+  goToEstatisticas(){
+    const {navigate} = this.props.navigation;
+    navigate('Estatisticas');
   }
 
   render() {
@@ -100,6 +86,10 @@ class GradeNovaScreen extends React.Component {
       <View style={styles.container}>
         <Header headerText="Grade Nova" backFunction = {() => this.goToHome()} />
         <ScrollView>
+          <TouchableOpacity style={styles.button} onPress={() => this.goToEstatisticas()}>
+            <Text style={styles.buttonText}>Detalhes</Text>
+          </TouchableOpacity>
+
           <View style={{padding: 10}}>
             {Object.keys(this.props.cadeirasGradeNova || {}).map((periodo)=>
               this.renderPeriodo(periodo)
