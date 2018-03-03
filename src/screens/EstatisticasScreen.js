@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { calcularCreditosOptativos } from '../actions';
+import { calcularEstatisticas } from '../actions';
 
 const styles = StyleSheet.create({
     container:{
@@ -28,7 +28,7 @@ class EstatisticasScreen extends React.Component {
     };
 
     componentWillMount(){
-        this.props.calcularCreditosOptativos(this.props.cadeirasGradeNova);
+        this.props.calcularEstatisticas(this.props.cadeirasGradeNova);
     }
 
     irParaGradeNova() {
@@ -41,8 +41,8 @@ class EstatisticasScreen extends React.Component {
             <View style={styles.container}>
                 <Header headerText="Detalhes" backFunction = {() => this.irParaGradeNova()} />
                 <Text style={styles.texto}>Creditos Obrigatórios:{this.props.creditosObrigatorios}/{this.props.totalCreditosObrigatorios}</Text>
-                <Text style={styles.texto}>Creditos Optativos Específicos:</Text>
-                <Text style={styles.texto}>Creditos Optativos Gerais:</Text>
+                <Text style={styles.texto}>Creditos Optativos Específicos:{this.props.creditosOptativosEspecificos}/{this.props.totalCreditosOptativosEspecificos}</Text>
+                <Text style={styles.texto}>Creditos Optativos Gerais:{this.props.creditosOptativosGerais}/{this.props.totalCreditosOptativosGerais}</Text>
                 <Text style={styles.textoPrincipal}> % do curso concluído</Text>
             </View>
         );
@@ -51,9 +51,24 @@ class EstatisticasScreen extends React.Component {
 
 const mapStateToProps = state => {
     const { cadeirasGradeNova } = state.gradeNova;
-    const { creditosObrigatorios, totalCreditosObrigatorios } = state.estatisticas;
+    const { 
+        creditosObrigatorios,
+        totalCreditosObrigatorios,
+        creditosOptativosEspecificos,
+        totalCreditosOptativosEspecificos,
+        creditosOptativosGerais,
+        totalCreditosOptativosGerais
+    } = state.estatisticas;
 
-    return { cadeirasGradeNova, creditosObrigatorios, totalCreditosObrigatorios };
+    return {
+        cadeirasGradeNova,
+        creditosObrigatorios,
+        totalCreditosObrigatorios,
+        creditosOptativosEspecificos,
+        totalCreditosOptativosEspecificos,
+        creditosOptativosGerais,
+        totalCreditosOptativosGerais
+    };
 }
   
-export default connect(mapStateToProps, { calcularCreditosOptativos })(EstatisticasScreen);
+export default connect(mapStateToProps, { calcularEstatisticas })(EstatisticasScreen);
