@@ -14,18 +14,19 @@ export const LOAD_GRADE_NOVA_SUCCESS = '[GradeNova] Load Grade Nova Success';
 export const LOAD_GRADE_NOVA_FAIL = '[GradeNova] Load Grade Nova Fail';
 export const MAPEAR_GRADE_NOVA = '[GradeNova] Mapear Grade Nova'
 
-export const EMAIL_CHANGED = 'email_changed';
-export const PASSWORD_CHANGED = 'password_changed';
-export const LOGIN_SUCCESS = 'login_success';
-export const LOGIN_FAIL = 'login_fail';
-export const LOGIN_USER = 'login_user';
-export const LOGOUT_USER = 'logout_user';
+export const EMAIL_CHANGED = '[Login] email_changed';
+export const PASSWORD_CHANGED = '[Login] password_changed';
+export const LOGIN_SUCCESS = '[Login] login_success';
+export const LOGIN_FAIL = '[Login] login_fail';
+export const LOGIN_USER = '[Login] login_user';
+export const LOGOUT_USER = '[Login] logout_user';
 
-export const NEW_EMAIL_CHANGED = 'new_email_changed';
-export const NEW_PASSWORD_CHANGED = 'new_password_changed';
-export const REGISTER_USER = 'register_user';
-export const REGISTER_SUCCESS = 'register_success';
-export const REGISTER_FAIL = 'register_fail';
+export const NAME_CHANGED = '[Cadastro] name_changed';
+export const NEW_EMAIL_CHANGED = '[Cadastro] new_email_changed';
+export const NEW_PASSWORD_CHANGED = '[Cadastro] new_password_changed';
+export const REGISTER_USER = '[Cadastro] register_user';
+export const REGISTER_SUCCESS = '[Cadastro] register_success';
+export const REGISTER_FAIL = '[Cadastro] register_fail';
 
 export const PERGUNTA_SELECIONADA = 'pergunta_selecionada';
 

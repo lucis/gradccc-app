@@ -6,10 +6,14 @@ import Button from './Button';
 import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { newEmailChanged, newPasswordChanged, registerUser } from '../actions';
+import { nameChanged, newEmailChanged, newPasswordChanged, registerUser } from '../actions';
 
 class CadastroForm extends Component
 {
+    onNameChange(text){
+        this.props.nameChanged(text);
+    };
+
     onEmailChange(text){
         this.props.newEmailChanged(text);
     };
@@ -19,9 +23,9 @@ class CadastroForm extends Component
     };
 
     onButtonPress(){
-        const { email, password } = this.props;
+        const { name, email, password } = this.props;
 
-        this.props.registerUser({ email, password });
+        this.props.registerUser({ name, email, password });
     };
 
     renderButton(){
@@ -41,6 +45,15 @@ class CadastroForm extends Component
             <Card>
                 <CardSection>
                     <Input
+                        label="Nome"
+                        placeholder="nome completo"
+                        onChangeText={this.onNameChange.bind(this)}
+                        value={this.props.name}
+                        />
+                </CardSection>
+
+                <CardSection>
+                    <Input
                         label="Email"
                         placeholder="email@ccc.ufcg.edu.br"
                         onChangeText={this.onEmailChange.bind(this)}
@@ -51,7 +64,7 @@ class CadastroForm extends Component
                 <CardSection>
                     <Input
                         secureTextEntry
-                        label="Password"
+                        label="Senha"
                         placeholder="digite sua senha.."
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}
@@ -79,9 +92,9 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-    const { email, password, error, loading } = state.cadastro;
+    const { name, email, password, error, loading } = state.cadastro;
 
-    return{ email, password, error, loading };
+    return{ name, email, password, error, loading };
 };
 
-export default connect(mapStateToProps, { newEmailChanged, newPasswordChanged, registerUser })(CadastroForm);
+export default connect(mapStateToProps, { nameChanged, newEmailChanged, newPasswordChanged, registerUser })(CadastroForm);

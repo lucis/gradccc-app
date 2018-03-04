@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from 'firebase';
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -66,13 +67,22 @@ class HomeScreen extends React.Component {
     }
   }
 
+  renderInitialMessage(){
+      const { currentUser } = firebase.auth();
+      const message = "Bem Vindo ao GradCCC" + ( currentUser ? ", " + currentUser.displayName : "" ) + "!";
+      return (
+          <Text style={styles.textStyle}>{message}</Text>
+          <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+      );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
-          <Text style={styles.textStyle}>Bem Vindo ao GradCCC!</Text>
-          <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          { this.renderInitialMessage() }
+
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
@@ -93,4 +103,5 @@ const mapStateToProps = state => {
   return { auth: state.auth }
 }
 
-export default connect(mapStateToProps, { logoutUser })(HomeScreen);;
+export default connect(mapStateToProps, { logoutUser })(HomeScreen);
+

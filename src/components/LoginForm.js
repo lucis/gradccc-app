@@ -7,7 +7,6 @@ import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { NavigationActions } from 'react-navigation';
 
 class LoginForm extends Component
 {
@@ -53,7 +52,7 @@ class LoginForm extends Component
                 <CardSection>
                     <Input
                         secureTextEntry
-                        label="Password"
+                        label="Senha"
                         placeholder="digite sua senha.."
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}

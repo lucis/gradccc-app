@@ -25,7 +25,7 @@ export default (state = INITIAL_STATE, action) =>
             return { ...state, ...INITIAL_STATE, user: action.payload };
         case LOGIN_FAIL:
             return { ...state, loading: false,
-                    error: 'Authentication Failed.', password: '' };
+                    error: 'Falha na autenticação.', password: '' };
         case LOGOUT_USER:
             firebase.auth().signOut();
             return { ...state, user: action.payload };
