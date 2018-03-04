@@ -1,16 +1,16 @@
 import { 
     CALCULAR_CREDITOS_OBRIGATORIOS,
     CALCULAR_CREDITOS_OPTATIVOS_ESPECIFICOS,
-    CALCULAR_CREDITOS_OPTATIVOS_GERAIS
+    CALCULAR_CREDITOS_OPTATIVOS_GERAIS,
+    CALCULAR_PERCENTAGEM_CURSO
 } from '../actions/types';
 
 const INITIAL_STATE = {
     creditosObrigatorios: 0,
     totalCreditosObrigatorios: 0,
     creditosOptativosEspecificos: 0,
-    totalCreditosOptativosEspecificos: 0,
     creditosOptativosGerais: 0,
-    totalCreditosOptativosGerais: 0
+    percentagemConclusao: 0
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -48,13 +48,11 @@ export default (state = INITIAL_STATE, action) => {
                                             if(cadeira.selecionada){
                                                 creditosPagos += cadeira.creditos;
                                             }
-                                            totalCreditos += cadeira.creditos;
                                         });
             });
             return{
                 ... state,
-                creditosOptativosEspecificos: creditosPagos,
-                totalCreditosOptativosEspecificos: totalCreditos
+                creditosOptativosEspecificos: creditosPagos
             };
 
         case CALCULAR_CREDITOS_OPTATIVOS_GERAIS:
@@ -69,13 +67,23 @@ export default (state = INITIAL_STATE, action) => {
                                             if(cadeira.selecionada){
                                                 creditosPagos += cadeira.creditos;
                                             }
-                                            totalCreditos += cadeira.creditos;
                                         });
             });
             return{
                 ... state,
-                creditosOptativosGerais: creditosPagos,
-                totalCreditosOptativosGerais: totalCreditos
+                creditosOptativosGerais: creditosPagos
+            };
+
+        case CALCULAR_PERCENTAGEM_CURSO:
+            const obrigatorias = state.creditosObrigatorios > 140 ? 140 : state.creditosObrigatorios;
+            const especificas = state.creditosOptativosEspecificos > 40 ? 40 : state.creditosOptativosEspecificos;
+            const gerais = state.creditosOptativosGerais > 16 ? 16 : state.creditosOptativosGerais;
+
+            let percentagem = ((obrigatorias + especificas + gerais) / 196) * 100;
+
+            return{
+                ... state,
+                percentagemConclusao: percentagem
             };
 
         default:

@@ -32,3 +32,4 @@ export const PERGUNTA_SELECIONADA = 'pergunta_selecionada';
 export const CALCULAR_CREDITOS_OBRIGATORIOS = '[Estatisticas] Calcular Creditos Obrigatorios';
 export const CALCULAR_CREDITOS_OPTATIVOS_ESPECIFICOS = '[Estatisticas] Calcular Creditos Optativos Especificos';
 export const CALCULAR_CREDITOS_OPTATIVOS_GERAIS = '[Estatisticas] Calcular Creditos Optativos Gerais';
+export const CALCULAR_PERCENTAGEM_CURSO = '[Estatisticas] Calcular Percentagem Curso';

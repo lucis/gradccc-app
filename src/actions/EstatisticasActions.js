@@ -1,7 +1,8 @@
 import {
     CALCULAR_CREDITOS_OBRIGATORIOS,
     CALCULAR_CREDITOS_OPTATIVOS_ESPECIFICOS,
-    CALCULAR_CREDITOS_OPTATIVOS_GERAIS
+    CALCULAR_CREDITOS_OPTATIVOS_GERAIS,
+    CALCULAR_PERCENTAGEM_CURSO
 } from '../actions/types';
 
 export const calcularEstatisticas = (cadeiras) => {
@@ -17,6 +18,9 @@ export const calcularEstatisticas = (cadeiras) => {
         dispatch({
             type: CALCULAR_CREDITOS_OPTATIVOS_GERAIS,
             payload: { cadeiras }
+        });
+        dispatch({
+            type: CALCULAR_PERCENTAGEM_CURSO
         });
     }
 };

@@ -41,9 +41,9 @@ class EstatisticasScreen extends React.Component {
             <View style={styles.container}>
                 <Header headerText="Detalhes" backFunction = {() => this.irParaGradeNova()} />
                 <Text style={styles.texto}>Creditos Obrigatórios:{this.props.creditosObrigatorios}/{this.props.totalCreditosObrigatorios}</Text>
-                <Text style={styles.texto}>Creditos Optativos Específicos:{this.props.creditosOptativosEspecificos}/{this.props.totalCreditosOptativosEspecificos}</Text>
-                <Text style={styles.texto}>Creditos Optativos Gerais:{this.props.creditosOptativosGerais}/{this.props.totalCreditosOptativosGerais}</Text>
-                <Text style={styles.textoPrincipal}> % do curso concluído</Text>
+                <Text style={styles.texto}>Creditos Optativos Específicos:{this.props.creditosOptativosEspecificos}/40</Text>
+                <Text style={styles.texto}>Creditos Optativos Gerais:{this.props.creditosOptativosGerais}/16</Text>
+                <Text style={styles.textoPrincipal}> {this.props.percentagemConclusao.toFixed(2)}% do curso concluído</Text>
             </View>
         );
     }
@@ -55,9 +55,8 @@ const mapStateToProps = state => {
         creditosObrigatorios,
         totalCreditosObrigatorios,
         creditosOptativosEspecificos,
-        totalCreditosOptativosEspecificos,
         creditosOptativosGerais,
-        totalCreditosOptativosGerais
+        percentagemConclusao
     } = state.estatisticas;
 
     return {
@@ -65,9 +64,8 @@ const mapStateToProps = state => {
         creditosObrigatorios,
         totalCreditosObrigatorios,
         creditosOptativosEspecificos,
-        totalCreditosOptativosEspecificos,
         creditosOptativosGerais,
-        totalCreditosOptativosGerais
+        percentagemConclusao
     };
 }
   
