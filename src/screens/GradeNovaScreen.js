@@ -8,6 +8,7 @@ import { loadGradeNova } from '../actions';
 import Cadeira from '../components/Cadeira';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Spinner from '../components/Spinner';
 import CadeiraNovaGrade from '../components/CadeiraNovaGrade';
 
 const styles = StyleSheet.create({
@@ -81,15 +82,22 @@ class GradeNovaScreen extends React.Component {
     navigate('Estatisticas');
   }
 
+  mostrarDetalhes() {
+    if (this.props.loading && !this.props.cadeirasGradeNova) return <Spinner size="large" />;
+
+    return(
+      <TouchableOpacity style={styles.button} onPress={() => this.goToEstatisticas()}>
+        <Text style={styles.buttonText}>Detalhes</Text>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header headerText="Grade Nova" backFunction = {() => this.goToHome()} />
         <ScrollView>
-          <TouchableOpacity style={styles.button} onPress={() => this.goToEstatisticas()}>
-            <Text style={styles.buttonText}>Detalhes</Text>
-          </TouchableOpacity>
-
+          {this.mostrarDetalhes()}
           <View style={{padding: 10}}>
             {Object.keys(this.props.cadeirasGradeNova || {}).map((periodo)=>
               this.renderPeriodo(periodo)
@@ -103,9 +111,9 @@ class GradeNovaScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { cadeirasGradeNova } = state.gradeNova;
+  const { cadeirasGradeNova, loading } = state.gradeNova;
   const { idCadeirasSelecionadas } = state.gradeAntiga;
-  return { cadeirasGradeNova, idCadeirasSelecionadas };
+  return { cadeirasGradeNova, loading, idCadeirasSelecionadas };
 };
 
 export default connect(mapStateToProps, { loadGradeNova })(GradeNovaScreen);
