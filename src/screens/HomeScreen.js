@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { logoutUser } from '../actions';
 import { connect } from 'react-redux';
 
@@ -34,10 +35,6 @@ class HomeScreen extends React.Component {
     navigate('GradeAntiga');
   }
 
-  goToFeedback() {
-    const {navigate} = this.props.navigation;
-    navigate('Feedback');
-  }
 
   goToFAQ() {
     const {navigate} = this.props.navigation;
@@ -77,13 +74,11 @@ class HomeScreen extends React.Component {
             Vamos lá!
           </Button>
           {this.renderLoginButton()}
-          <Button onPress={() => this.goToFeedback()}>
-            Feedback
-          </Button>
           <Button onPress={() => this.goToFAQ()}>
             FAQ
           </Button>
         </View>
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }

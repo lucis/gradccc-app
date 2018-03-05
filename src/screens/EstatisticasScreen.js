@@ -4,6 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { calcularEstatisticas } from '../actions';
 
 const styles = StyleSheet.create({
@@ -44,6 +45,7 @@ class EstatisticasScreen extends React.Component {
                 <Text style={styles.texto}>Creditos Optativos Específicos:{this.props.creditosOptativosEspecificos}/40</Text>
                 <Text style={styles.texto}>Creditos Optativos Gerais:{this.props.creditosOptativosGerais}/16</Text>
                 <Text style={styles.textoPrincipal}> {this.props.percentagemConclusao.toFixed(2)}% do curso concluído</Text>
+                <Footer  navigation={ this.props.navigation }/>
             </View>
         );
     }

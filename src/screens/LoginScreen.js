@@ -7,6 +7,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import LoginForm from '../components/LoginForm';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { NavigationActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
@@ -69,6 +70,7 @@ class LoginScreen extends React.Component {
                     </Text>
                 </TouchableOpacity>
             </View>
+            <Footer  navigation={ this.props.navigation }/>
         </View>
     );
   };

@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import ListaDePerguntas from '../components/ListaDePerguntas';
 
 
@@ -60,6 +61,7 @@ class FAQScreen extends React.Component {
                      </Text>
                      <ListaDePerguntas />
                 </View>
+                <Footer  navigation={ this.props.navigation }/>
             </View> 
         );
     }

@@ -8,6 +8,7 @@ import { loadGradeNova } from '../actions';
 import Cadeira from '../components/Cadeira';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import CadeiraNovaGrade from '../components/CadeiraNovaGrade';
 
 const styles = StyleSheet.create({
@@ -97,6 +98,7 @@ class GradeNovaScreen extends React.Component {
           </View>
 
         </ScrollView>
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }

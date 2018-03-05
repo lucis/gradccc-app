@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { loadGradeAntiga, toggleCadeira, selecionarTodasAsCadeiras, selecionarTodasAsCadeirasDoPeriodo } from '../actions';
 
 const styles = StyleSheet.create({
@@ -110,7 +111,7 @@ class GradeAntigaScreen extends React.Component {
         <TouchableOpacity style={styles.button} onPress={() => this.irParaGradeNova()}>
           <Text style={styles.buttonText}>Migrar</Text>
         </TouchableOpacity>
-
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }

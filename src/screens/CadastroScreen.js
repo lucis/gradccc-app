@@ -8,6 +8,7 @@ import { NavigationActions } from 'react-navigation';
 import CadastroForm from '../components/CadastroForm';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 
 const styles = StyleSheet.create({
     container:{
@@ -53,6 +54,7 @@ class CadastroScreen extends React.Component {
             <Header headerText="Cadastro" backFunction = {() => this.goToLogin()} />
             <CadastroForm />
             {this.redirecionarAposSucesso()}
+            <Footer  navigation={ this.props.navigation }/>
         </View>
     );
   };
