@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { logoutUser } from '../actions';
 import { connect } from 'react-redux';
 
@@ -20,6 +21,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center'
     },
+    messageContent: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     textStyle: {
       fontSize: 14
     }
@@ -34,10 +39,6 @@ class HomeScreen extends React.Component {
     navigate('GradeAntiga');
   }
 
-  goToFeedback() {
-    const {navigate} = this.props.navigation;
-    navigate('Feedback');
-  }
 
   goToFAQ() {
     const {navigate} = this.props.navigation;
@@ -47,6 +48,12 @@ class HomeScreen extends React.Component {
   goToLogin() {
     const {navigate} = this.props.navigation;
     navigate('Login');
+  }
+
+  logout(){
+      this.props.logoutUser();
+      const {navigate} = this.props.navigation;
+      navigate('Home');
   }
 
   renderLoginButton(){
@@ -59,11 +66,23 @@ class HomeScreen extends React.Component {
     }
     else{
       return (
-        <Button onPress={() => this.props.logoutUser()}>
+        <Button onPress={() => this.logout()}>
           Logout
         </Button>
       );
     }
+  }
+
+  renderInitialMessage(){
+      const { user } = this.props.auth;
+      const message = "Bem Vindo ao GradCCC" + ( user!=null ?
+          ", " + user.displayName : "" ) + "!";
+      return (
+          <View style={styles.messageContent}>
+            <Text style={styles.textStyle}>{message}</Text>
+            <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          </View>
+      );
   }
 
   render() {
@@ -71,19 +90,16 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
-          <Text style={styles.textStyle}>Bem Vindo ao GradCCC!</Text>
-          <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          {this.renderInitialMessage()}
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
           {this.renderLoginButton()}
-          <Button onPress={() => this.goToFeedback()}>
-            Feedback
-          </Button>
           <Button onPress={() => this.goToFAQ()}>
             FAQ
           </Button>
         </View>
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }
@@ -93,4 +109,5 @@ const mapStateToProps = state => {
   return { auth: state.auth }
 }
 
-export default connect(mapStateToProps, { logoutUser })(HomeScreen);;
+export default connect(mapStateToProps, { logoutUser })(HomeScreen);
+

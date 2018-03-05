@@ -6,10 +6,14 @@ import Button from './Button';
 import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { newEmailChanged, newPasswordChanged, registerUser } from '../actions';
+import { nameChanged, newEmailChanged, newPasswordChanged, registerUser } from '../actions';
 
 class CadastroForm extends Component
 {
+    onNameChange(text){
+        this.props.nameChanged(text);
+    };
+
     onEmailChange(text){
         this.props.newEmailChanged(text);
     };
@@ -19,9 +23,9 @@ class CadastroForm extends Component
     };
 
     onButtonPress(){
-        const { email, password } = this.props;
+        const { name, email, password } = this.props;
 
-        this.props.registerUser({ email, password });
+        this.props.registerUser({ name, email, password });
     };
 
     renderButton(){
@@ -29,7 +33,7 @@ class CadastroForm extends Component
             return <Spinner />;
         }
         return (
-            <Button onPress={this.onButtonPress.bind(this)}>
+            <Button style={styles.buttonStyle} onPress={this.onButtonPress.bind(this)}>
                 Cadastrar
             </Button>
         );
@@ -39,6 +43,15 @@ class CadastroForm extends Component
     {
         return(
             <Card>
+                <CardSection>
+                    <Input
+                        label="Nome"
+                        placeholder="nome completo"
+                        onChangeText={this.onNameChange.bind(this)}
+                        value={this.props.name}
+                        />
+                </CardSection>
+
                 <CardSection>
                     <Input
                         label="Email"
@@ -51,7 +64,7 @@ class CadastroForm extends Component
                 <CardSection>
                     <Input
                         secureTextEntry
-                        label="Password"
+                        label="Senha"
                         placeholder="digite sua senha.."
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}
@@ -71,6 +84,15 @@ class CadastroForm extends Component
 };
 
 const styles = {
+    buttonStyle: {
+        flex: 1,
+        padding: 20,
+        margin: 5,
+        height: 65,
+        alignItems: 'center',
+        backgroundColor: '#069',
+        borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+    },
     errorTextStyle: {
         fontSize: 20,
         alignSelf: 'center',
@@ -79,9 +101,9 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-    const { email, password, error, loading } = state.cadastro;
+    const { name, email, password, error, loading } = state.cadastro;
 
-    return{ email, password, error, loading };
+    return{ name, email, password, error, loading };
 };
 
-export default connect(mapStateToProps, { newEmailChanged, newPasswordChanged, registerUser })(CadastroForm);
+export default connect(mapStateToProps, { nameChanged, newEmailChanged, newPasswordChanged, registerUser })(CadastroForm);

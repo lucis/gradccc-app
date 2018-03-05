@@ -3,6 +3,8 @@ import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import RadioButton from 'radio-button-react-native';
+import email from 'react-native-email'
 
 const styles = StyleSheet.create({
     container:{
@@ -44,18 +46,28 @@ class FeedbackScreen extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {text: ''};
+        this.state = {text: '', feedback: 'email.da.gente@hotmail.com'};
       }
-
+    handleOnPress(value){
+        this.setState({feedback:value})
+    }
     _onPressSendButton() { 
         if(this.state.text == ''){
             Alert.alert('Por favor, digite algum texto.')
         }else{
+            this.handleEmail();
             Alert.alert('Obrigado pelo seu feedback!')
             this.goToHome();
         }
 
       }
+    handleEmail(){
+        const to = [this.state.feedback] // string or array of email addresses
+        email(to, {
+            subject: 'GradCCC FeedBack',
+            body: this.state.text
+        }).catch(console.error)
+    }
     
     render() {
         return (
@@ -69,12 +81,19 @@ class FeedbackScreen extends React.Component {
                      O seu feedback é muito importante pra nós. 
                      Entre em contato conosco através do campo abaixo indicando melhorias ou fazendo críticas.
                      </Text>
+                      <RadioButton currentValue={this.state.feedback} value={'email.da.gente@hotmail.com'} onPress={this.handleOnPress.bind(this)}>
+                    <Text>Feedback técnico </Text>
+                    </RadioButton>
+                      <RadioButton currentValue={this.state.feedback} value={'email.de.joao@hotmail.com'} onPress={this.handleOnPress.bind(this)}>
+                    <Text>Feedback conteúdo</Text>
+                     </RadioButton>
                     <TextInput
                         placeholder = "Escreva aqui seu comentário."
                         style = {styles.textarea}
                         multiline = {true}
                         autoGrow = {true}
                         editable = {true}
+                        blurOnSubmit={true}
                         maxLength = {2000}
                         underlineColorAndroid= 'rgba(0,0,0,0)'
                         onChangeText={(text) => this.setState({text})}
