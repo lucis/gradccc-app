@@ -1,5 +1,4 @@
 import React from "react";
-import firebase from 'firebase';
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -20,6 +19,10 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
+    },
+    messageContent: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     textStyle: {
       fontSize: 14
@@ -50,6 +53,12 @@ class HomeScreen extends React.Component {
     navigate('Login');
   }
 
+  logout(){
+      this.props.logoutUser();
+      const {navigate} = this.props.navigation;
+      navigate('Home');
+  }
+
   renderLoginButton(){
     if(this.props.auth.user==null){
       return(
@@ -60,7 +69,7 @@ class HomeScreen extends React.Component {
     }
     else{
       return (
-        <Button onPress={() => this.props.logoutUser()}>
+        <Button onPress={() => this.logout()}>
           Logout
         </Button>
       );
@@ -68,11 +77,14 @@ class HomeScreen extends React.Component {
   }
 
   renderInitialMessage(){
-      const { currentUser } = firebase.auth();
-      const message = "Bem Vindo ao GradCCC" + ( currentUser ? ", " + currentUser.displayName : "" ) + "!";
+      const { user } = this.props.auth;
+      const message = "Bem Vindo ao GradCCC" + ( user!=null ?
+          ", " + user.displayName : "" ) + "!";
       return (
-          <Text style={styles.textStyle}>{message}</Text>
-          <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          <View style={styles.messageContent}>
+            <Text style={styles.textStyle}>{message}</Text>
+            <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          </View>
       );
   }
 
@@ -81,8 +93,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
-          { this.renderInitialMessage() }
-
+          {this.renderInitialMessage()}
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
