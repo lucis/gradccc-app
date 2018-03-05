@@ -7,7 +7,6 @@ import Spinner from './Spinner';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { NavigationActions } from 'react-navigation';
 
 class LoginForm extends Component
 {
@@ -18,7 +17,6 @@ class LoginForm extends Component
     onPasswordChange(text){
         this.props.passwordChanged(text);
     };
-
 
     onButtonPress(){
         const { email, password } = this.props;
@@ -31,7 +29,7 @@ class LoginForm extends Component
             return <Spinner />;
         }
         return (
-            <Button onPress={this.onButtonPress.bind(this)}>
+            <Button style={styles.buttonStyle} onPress={this.onButtonPress.bind(this)}>
                 Login
             </Button>
         );
@@ -53,7 +51,7 @@ class LoginForm extends Component
                 <CardSection>
                     <Input
                         secureTextEntry
-                        label="Password"
+                        label="Senha"
                         placeholder="digite sua senha.."
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password}
@@ -73,6 +71,15 @@ class LoginForm extends Component
 };
 
 const styles = {
+    buttonStyle: {
+        flex: 1,
+        padding: 20,
+        margin: 5,
+        height: 65,
+        alignItems: 'center',
+        backgroundColor: '#069',
+        borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+    },
     errorTextStyle: {
         fontSize: 20,
         alignSelf: 'center',

@@ -28,8 +28,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case LOAD_GRADE_ANTIGA_SUCCESS:
             const { currentUser } = firebase.auth();
-            console.log("USEEEEEERRRRRRRRRRRRRRR");
-            console.log(currentUser);
+
             let novasCadeiras = action.payload;
             let novasCadeirasSelecionadas = [];
 

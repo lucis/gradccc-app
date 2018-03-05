@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center'
     },
+    messageContent: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     textStyle: {
       fontSize: 14
     }
@@ -46,6 +50,12 @@ class HomeScreen extends React.Component {
     navigate('Login');
   }
 
+  logout(){
+      this.props.logoutUser();
+      const {navigate} = this.props.navigation;
+      navigate('Home');
+  }
+
   renderLoginButton(){
     if(this.props.auth.user==null){
       return(
@@ -56,11 +66,23 @@ class HomeScreen extends React.Component {
     }
     else{
       return (
-        <Button onPress={() => this.props.logoutUser()}>
+        <Button onPress={() => this.logout()}>
           Logout
         </Button>
       );
     }
+  }
+
+  renderInitialMessage(){
+      const { user } = this.props.auth;
+      const message = "Bem Vindo ao GradCCC" + ( user!=null ?
+          ", " + user.displayName : "" ) + "!";
+      return (
+          <View style={styles.messageContent}>
+            <Text style={styles.textStyle}>{message}</Text>
+            <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          </View>
+      );
   }
 
   render() {
@@ -68,8 +90,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Header headerText="GradCCC" />
         <View style={styles.screenContent}>
-          <Text style={styles.textStyle}>Bem Vindo ao GradCCC!</Text>
-          <Text style={styles.textStyle}>Para começar, clique no botão abaixo.</Text>
+          {this.renderInitialMessage()}
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
@@ -88,4 +109,5 @@ const mapStateToProps = state => {
   return { auth: state.auth }
 }
 
-export default connect(mapStateToProps, { logoutUser })(HomeScreen);;
+export default connect(mapStateToProps, { logoutUser })(HomeScreen);
+

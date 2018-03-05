@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Footer from '../components/Footer';
+import Spinner from '../components/Spinner';
 import { loadGradeAntiga, toggleCadeira, selecionarTodasAsCadeiras, selecionarTodasAsCadeirasDoPeriodo } from '../actions';
 
 const styles = StyleSheet.create({
@@ -90,17 +91,24 @@ class GradeAntigaScreen extends React.Component {
     navigate('GradeNova');
   }
 
+  mostrarSelecionarTudo() {
+    if (this.props.loading && !this.props.cadeiras) return <Spinner size="large" />;
+
+    return(
+      <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
+        <Text style={styles.buttonText}>Selecionar tudo</Text>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header headerText="Grade antiga" backFunction = {() => this.goToHome()} />
         <ScrollView>
 
-        <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
-          <Text style={styles.buttonText}>Selecionar tudo</Text>
-        </TouchableOpacity>
-
         <View style={{padding: 10}}>
+          {this.mostrarSelecionarTudo()}
           {Object.keys(this.props.cadeiras || {}).map((periodo)=>
             this.renderPeriodo(periodo)
           )}
@@ -118,8 +126,9 @@ class GradeAntigaScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { cadeiras } = state.gradeAntiga;
-  return { cadeiras };
+  const { cadeiras, loading } = state.gradeAntiga;
+
+  return { cadeiras, loading };
 };
 
 export default connect(mapStateToProps, {loadGradeAntiga, toggleCadeira, selecionarTodasAsCadeiras, selecionarTodasAsCadeirasDoPeriodo})(GradeAntigaScreen);
