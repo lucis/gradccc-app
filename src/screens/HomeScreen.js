@@ -38,7 +38,6 @@ class HomeScreen extends React.Component {
     navigate('GradeAntiga');
   }
 
-
   goToFAQ() {
     const {navigate} = this.props.navigation;
     navigate('FAQ');
@@ -64,9 +63,6 @@ class HomeScreen extends React.Component {
           {this.renderInitialMessage()}
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
-          </Button>
-          <Button onPress={() => this.goToFeedback()}>
-            Feedback
           </Button>
           <Button onPress={() => this.goToFAQ()}>
             FAQ
