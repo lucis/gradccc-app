@@ -19,7 +19,7 @@ const limitarOptativas = (cadeira) => {
 export const loadGradeAntiga = ()=>{
     return (dispatch) => {
         dispatch({type: LOAD_GRADE_ANTIGA});
-        axios.get('http://192.168.1.12:5002/antigo')
+        axios.get('https://juniorluciano.com/gradccc/antigo')
           .then(function (response) {
             const cadeiras = response.data;
             const mapaCadeiras = {};
