@@ -1,8 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { logoutUser } from '../actions';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -48,34 +47,6 @@ class HomeScreen extends React.Component {
     navigate('FAQ');
   }
 
-  goToLogin() {
-    const {navigate} = this.props.navigation;
-    navigate('Login');
-  }
-
-  logout(){
-      this.props.logoutUser();
-      const {navigate} = this.props.navigation;
-      navigate('Home');
-  }
-
-  renderLoginButton(){
-    if(this.props.auth.user==null){
-      return(
-        <Button onPress={() => this.goToLogin()}>
-          Login
-        </Button>
-      );
-    }
-    else{
-      return (
-        <Button onPress={() => this.logout()}>
-          Logout
-        </Button>
-      );
-    }
-  }
-
   renderInitialMessage(){
       const { user } = this.props.auth;
       const message = "Bem Vindo ao GradCCC" + ( user!=null ?
@@ -97,7 +68,6 @@ class HomeScreen extends React.Component {
           <Button onPress={() => this.goToGradeAntiga()}>
             Vamos lá!
           </Button>
-          {this.renderLoginButton()}
           <Button onPress={() => this.goToFeedback()}>
             Feedback
           </Button>
@@ -114,5 +84,5 @@ const mapStateToProps = state => {
   return { auth: state.auth }
 }
 
-export default connect(mapStateToProps, { logoutUser })(HomeScreen);
+export default connect(mapStateToProps)(HomeScreen);
 
