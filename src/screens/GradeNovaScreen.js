@@ -8,6 +8,7 @@ import { loadGradeNova } from '../actions';
 import Cadeira from '../components/Cadeira';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
 import CadeiraNovaGrade from '../components/CadeiraNovaGrade';
 
@@ -95,7 +96,8 @@ class GradeNovaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grade Nova" backFunction = {() => this.goToHome()} />
+        <Header headerText="Grade Nova" backFunction = {() => this.goToHome()}
+                navigation={ this.props.navigation }/>
         <ScrollView>
           {this.mostrarDetalhes()}
           <View style={{padding: 10}}>
@@ -105,6 +107,7 @@ class GradeNovaScreen extends React.Component {
           </View>
 
         </ScrollView>
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }

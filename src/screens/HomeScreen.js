@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -37,10 +38,6 @@ class HomeScreen extends React.Component {
     navigate('GradeAntiga');
   }
 
-  goToFeedback() {
-    const {navigate} = this.props.navigation;
-    navigate('Feedback');
-  }
 
   goToFAQ() {
     const {navigate} = this.props.navigation;
@@ -62,7 +59,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="GradCCC" />
+        <Header headerText="GradCCC" navigation={ this.props.navigation }/>
         <View style={styles.screenContent}>
           {this.renderInitialMessage()}
           <Button onPress={() => this.goToGradeAntiga()}>
@@ -75,6 +72,7 @@ class HomeScreen extends React.Component {
             FAQ
           </Button>
         </View>
+        <Footer  navigation={ this.props.navigation }/>
       </View>
     );
   }

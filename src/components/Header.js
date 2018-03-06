@@ -4,9 +4,6 @@ import { logoutUser } from '../actions';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
-    static navigationOptions = {
-        header: null
-    };
 
     goToLogin() {
         const {navigate} = this.props.navigation;
