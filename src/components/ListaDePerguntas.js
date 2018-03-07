@@ -30,7 +30,7 @@ class ListaDePerguntas extends Component {
 
 const mapStateToProps = state => ({
   perguntas: state.faq,
-  selecionado: state.selecionado
+  selected: state.selecionado
 })
 
 export default connect(mapStateToProps)(ListaDePerguntas);
