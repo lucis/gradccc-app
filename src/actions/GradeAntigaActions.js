@@ -3,7 +3,8 @@ import { LOAD_GRADE_ANTIGA,
     LOAD_GRADE_ANTIGA_SUCCESS,
     TOGGLE_CADEIRA,
     SELECIONA_PERIODO,
-    SELECIONA_TODAS_DISCIPLINAS
+    SELECIONA_TODAS_DISCIPLINAS,
+    LOAD_SELECIONADAS_SUCCESS
 } from '../actions/types';
 import firebase from 'firebase';
 import axios from 'axios';
@@ -31,6 +32,9 @@ export const loadGradeAntiga = ()=>{
                 }
             });
 
+            dispatch({type: LOAD_GRADE_ANTIGA_SUCCESS,
+                payload:  mapaCadeiras});
+
             const { currentUser } = firebase.auth();
             const cadeirasSelecionadas = [];
 
@@ -49,12 +53,11 @@ export const loadGradeAntiga = ()=>{
                               }
                           }
                       })
+                      dispatch({type: LOAD_SELECIONADAS_SUCCESS, payload: cadeirasSelecionadas});
                   }
               });
             }
 
-            dispatch({type: LOAD_GRADE_ANTIGA_SUCCESS,
-                    payload: { mapaCadeiras: mapaCadeiras, cadeirasSelecionadas: cadeirasSelecionadas }});
           })
           .catch(function (error) {
             dispatch({type: LOAD_GRADE_ANTIGA_FAIL});

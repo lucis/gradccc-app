@@ -6,7 +6,8 @@ import { LOAD_GRADE_ANTIGA,
         REALIZA_CONVERSAO,
         REALIZA_CONVERSAO_SUCCESS,
         REALIZA_CONVERSAO_FAIL,
-        SELECIONA_TODAS_DISCIPLINAS
+        SELECIONA_TODAS_DISCIPLINAS,
+        LOAD_SELECIONADAS_SUCCESS
     } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,14 +27,16 @@ export default (state = INITIAL_STATE, action) => {
                 loaded: false
             };
         case LOAD_GRADE_ANTIGA_SUCCESS:
-            const { mapaCadeiras, cadeirasSelecionadas } = action.payload;
-
+            return {
+                ...state,
+                cadeiras: action.payload
+            };
+        case LOAD_SELECIONADAS_SUCCESS:
             return {
                 ...state,
                 loaded: true,
                 loading: false,
-                cadeiras: mapaCadeiras,
-                idCadeirasSelecionadas: cadeirasSelecionadas
+                idCadeirasSelecionadas: action.payload
             };
         case LOAD_GRADE_ANTIGA_FAIL:
             return {
