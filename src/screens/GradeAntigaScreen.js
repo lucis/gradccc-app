@@ -28,15 +28,37 @@ const styles = StyleSheet.create({
       padding: 20,
       margin: 10,
       alignItems: 'center',
-      height: 70,
+      alignSelf: 'stretch',
+      height: 55,
       borderWidth: 2, borderColor: '#069',
-      backgroundColor: '#069'
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-    alignSelf: 'center'
-  }
+      backgroundColor: '#B22222',
+      borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+    },
+    buttonMigrar: {
+      padding: 20,
+      margin: 10,
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      height: 60,
+      borderWidth: 2, borderColor: '#069',
+      backgroundColor: '#3CB371',
+      borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+    },
+    buttonPeriodo: {
+      padding: 20,
+      margin: 10,
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      height: 60,
+      borderWidth: 2, borderColor: '#069',
+      backgroundColor: '#D3D3D3',
+      borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+    },
+    buttonText: {
+      fontSize: 16,
+      color: '#fff',
+      alignSelf: 'center'
+    }
 });
 
 class GradeAntigaScreen extends React.Component {
@@ -50,10 +72,10 @@ class GradeAntigaScreen extends React.Component {
 
   renderPeriodo(periodo) {
     const cadeiras = this.props.cadeiras[periodo];
-    var label = periodo=='*' ? 'Optativas' : periodo + 'º período';
+    var label = periodo == '*' ? 'Optativas' : periodo + 'º período';
     return (
       <View>
-          <TouchableOpacity onPress={ () => this.selecionarCadeirasPorPeriodo(periodo) }>
+          <TouchableOpacity style={styles.buttonPeriodo} onPress={ () => this.selecionarCadeirasPorPeriodo(periodo) }>
               <Text style={styles.textStyle}>{label}</Text>
           </TouchableOpacity>
           {this.renderDisciplinas(periodo, cadeiras)}
@@ -96,7 +118,16 @@ class GradeAntigaScreen extends React.Component {
 
     return(
       <TouchableOpacity style={styles.button} onPress={this.selecionarTudo.bind(this)}>
-        <Text style={styles.buttonText}>Selecionar tudo</Text>
+        <Text style={styles.buttonText}>Selecionar todas disciplinas</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  mostrarBotaoMigrar() {
+    if (this.props.loading && !this.props.cadeiras) return;
+    return(
+      <TouchableOpacity style={styles.buttonMigrar} onPress={() => this.irParaGradeNova()}>
+          <Text style={styles.buttonText}>Realizar Migração</Text>
       </TouchableOpacity>
     );
   }
@@ -107,19 +138,14 @@ class GradeAntigaScreen extends React.Component {
         <Header headerText="Grade antiga" backFunction = {() => this.goToHome()}
                 navigation={ this.props.navigation }/>
         <ScrollView>
-
-        <View style={{padding: 10}}>
-          {this.mostrarSelecionarTudo()}
-          {Object.keys(this.props.cadeiras || {}).map((periodo)=>
-            this.renderPeriodo(periodo)
-          )}
-        </View>
-
+          <View style={{padding: 10}}>
+            {this.mostrarSelecionarTudo()}
+            {Object.keys(this.props.cadeiras || {}).map((periodo)=>
+              this.renderPeriodo(periodo)
+            )}
+          </View>
         </ScrollView>
-
-        <TouchableOpacity style={styles.button} onPress={() => this.irParaGradeNova()}>
-          <Text style={styles.buttonText}>Migrar</Text>
-        </TouchableOpacity>
+        {this.mostrarBotaoMigrar()}
         <Footer  navigation={ this.props.navigation }/>
       </View>
     );

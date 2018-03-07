@@ -27,36 +27,14 @@ export default (state = INITIAL_STATE, action) => {
                 loaded: false
             };
         case LOAD_GRADE_ANTIGA_SUCCESS:
-            const { currentUser } = firebase.auth();
-
-            let novasCadeiras = action.payload;
-            let novasCadeirasSelecionadas = [];
-
-            if(currentUser){
-                firebase.database().ref(`/users/${currentUser.uid}/cadeiras_selecionadas`)
-                    .on('value', data => {
-                        if(data.val()){
-                            for(var i = 0; i<data.val().length; i++){
-                                novasCadeirasSelecionadas.push(data.val()[i]);
-                            }
-
-                            Object.keys(novasCadeiras).forEach((periodo)=>{
-                                for(var i = 0; i<novasCadeiras[periodo].length; i++){
-                                    if (novasCadeirasSelecionadas.includes(novasCadeiras[periodo][i].id_disc)){
-                                        novasCadeiras[periodo][i].selecionada = true;
-                                    }
-                                }
-                            })
-                        }
-                    });
-            }
+            const { mapaCadeiras, cadeirasSelecionadas } = action.payload;
 
             return {
                 ...state,
                 loaded: true,
                 loading: false,
-                cadeiras: novasCadeiras,
-                idCadeirasSelecionadas: novasCadeirasSelecionadas
+                cadeiras: mapaCadeiras,
+                idCadeirasSelecionadas: cadeirasSelecionadas
             };
         case LOAD_GRADE_ANTIGA_FAIL:
             return {
