@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
     borderWidth: 2, borderColor: '#069',
     backgroundColor: '#069'
   },
+  divPeriodo: {
+    padding: 20,
+    margin: 10,
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    height: 60,
+    borderWidth: 2, borderColor: '#069',
+    backgroundColor: '#D3D3D3',
+    borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da'
+  },
   buttonText: {
     fontSize: 20,
     color: '#fff',
@@ -61,7 +71,11 @@ class GradeNovaScreen extends React.Component {
     const cadeiras = this.props.cadeirasGradeNova[periodo];
     return (
       <View>
-        <Text style={styles.textStyle}>{periodo === "*" ? "Optativas" : `${periodo}º período`}</Text>
+        <View style={styles.divPeriodo}>
+          <Text style={styles.textStyle}>
+            {periodo === "*" ? "Optativas" : `${periodo}º período`}
+          </Text>
+        </View>
         {this.renderDisciplinas(periodo, cadeiras)}
       </View>
     )
@@ -73,9 +87,9 @@ class GradeNovaScreen extends React.Component {
     );
   }
 
-  goToHome(){
+  goToGradeAntiga() {
     const {navigate} = this.props.navigation;
-    navigate('Home');
+    navigate('GradeAntiga');
   }
 
   goToEstatisticas(){
@@ -96,7 +110,7 @@ class GradeNovaScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Grade Nova" backFunction = {() => this.goToHome()}
+        <Header headerText="Grade Nova" backFunction = {() => this.goToGradeAntiga()}
                 navigation={ this.props.navigation }/>
         <ScrollView>
           {this.mostrarDetalhes()}

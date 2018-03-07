@@ -4,26 +4,26 @@ import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     container:{
-        padding: 20,
-        margin: 10,
+        padding: 13,
+        margin: 8,
         flexDirection: 'row',
-        height: 70,
+        height: 80,
         backgroundColor: 'transparent',
         borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da',
     },
     containerSelecionado: {
-        padding: 20,
-        margin: 10,
+        padding: 13,
+        margin: 8,
         flexDirection: 'row',
-        height: 70,
+        height: 80,
         borderRadius: 4, borderWidth: 2, borderColor: '#fff',
         backgroundColor: '#069'
     },
     texto: {
-      fontSize: 20
+        fontSize: 17
     },
     textoSelecionado: {
-        fontSize: 20,
+        fontSize: 17,
         color: '#fff'
     }
 });
