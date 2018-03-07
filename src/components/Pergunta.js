@@ -6,12 +6,11 @@ import { connect } from 'react-redux';
 
 class Pergunta extends Component{
     renderResposta(){
-        const {pergunta, selecionado} = this.props;
-        console.log("Aqui:" + pergunta.id)
-        console.log("Aqui:" + selecionado)
-        if(pergunta.id === selecionado){
+        console.log("Aqui:" + this.props.pergunta.id)
+        console.log("Aqui2:" + this.props.selected)
+        if(this.props.selected !== undefined && this.props.selected === idPerguntaSelecionada){
             return (
-                <Text>{pergunta.resposta}</Text>
+                <Text>Resposta</Text>
             );
         }
     }
