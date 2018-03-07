@@ -5,16 +5,16 @@ import { selecionaPergunta } from '../actions';
 import { connect } from 'react-redux';
 
 class Pergunta extends Component{
+
     renderResposta(){
-        console.log("Aqui:" + this.props.pergunta.id)
-        console.log("Aqui2:" + this.props.selected)
-        if(this.props.selected !== undefined && this.props.selected === idPerguntaSelecionada){
+        const {pergunta, idPerguntaSelecionada} = this.props;
+        if(pergunta.id === idPerguntaSelecionada){
+            console.log("Entrei:" + idPerguntaSelecionada)
             return (
-                <Text>Resposta</Text>
+                <Text>{pergunta.resposta}</Text>
             );
         }
     }
-
     render (){
         const {titleStyle} = styles;
         const { id, questao } = this.props.pergunta;
@@ -39,7 +39,7 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-    return { idPerguntaSelecionada: state.selecionado.id}
+    return { idPerguntaSelecionada: state.selecionado}
 }
 
 export default connect(mapStateToProps, {selecionaPergunta})(Pergunta);
