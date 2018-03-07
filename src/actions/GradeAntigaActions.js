@@ -34,8 +34,30 @@ export const loadGradeAntiga = ()=>{
                 }
             });
 
+            const { currentUser } = firebase.auth();
+            const cadeirasSelecionadas = [];
 
-            dispatch({type: LOAD_GRADE_ANTIGA_SUCCESS, payload: mapaCadeiras});
+            if(currentUser){
+              firebase.database().ref(`/users/${currentUser.uid}/cadeiras_selecionadas`)
+                  .on('value', data => {
+                  if(data.val()){
+                      for(var i = 0; i<data.val().length; i++){
+                          cadeirasSelecionadas.push(data.val()[i]);
+                      }
+
+                      Object.keys(mapaCadeiras).forEach((periodo)=>{
+                          for(var i = 0; i<mapaCadeiras[periodo].length; i++){
+                              if (cadeirasSelecionadas.includes(mapaCadeiras[periodo][i].id_disc)){
+                                  mapaCadeiras[periodo][i].selecionada = true;
+                              }
+                          }
+                      })
+                  }
+              });
+            }
+
+            dispatch({type: LOAD_GRADE_ANTIGA_SUCCESS,
+                    payload: { mapaCadeiras: mapaCadeiras, cadeirasSelecionadas: cadeirasSelecionadas }});
           })
           .catch(function (error) {
             dispatch({type: LOAD_GRADE_ANTIGA_FAIL});
