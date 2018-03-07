@@ -8,7 +8,6 @@ import { LOAD_GRADE_ANTIGA,
         REALIZA_CONVERSAO_FAIL,
         SELECIONA_TODAS_DISCIPLINAS
     } from '../actions/types';
-import firebase from 'firebase';
 
 const INITIAL_STATE = {
     loading: false,

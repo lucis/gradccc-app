@@ -3,12 +3,9 @@ import { LOAD_GRADE_ANTIGA,
     LOAD_GRADE_ANTIGA_SUCCESS,
     TOGGLE_CADEIRA,
     SELECIONA_PERIODO,
-    REALIZA_CONVERSAO,
-    REALIZA_CONVERSAO_SUCCESS,
-    REALIZA_CONVERSAO_FAIL,
     SELECIONA_TODAS_DISCIPLINAS
 } from '../actions/types';
-
+import firebase from 'firebase';
 import axios from 'axios';
 
 const limitarOptativas = (cadeira) => {
