@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import CardSection from './CardSection.js';
-import { Text, TouchableWithoutFeedback, View } from 'react-native'; 
+import { Text, TouchableWithoutFeedback, View, LayoutAnimation } from 'react-native'; 
 import { selecionaPergunta } from '../actions';
 import { connect } from 'react-redux';
 
 class Pergunta extends Component{
 
+    componentWillUpdate(){
+        LayoutAnimation.spring();
+    }
+
     renderResposta(){
-        const {pergunta, idPerguntaSelecionada} = this.props;
-        if(pergunta.id === idPerguntaSelecionada){
-            console.log("Entrei:" + idPerguntaSelecionada)
+        const {pergunta, expanded} = this.props;
+        if(expanded){
             return (
-                <Text>{pergunta.resposta}</Text>
+                <CardSection> 
+                    <Text style={{ flex: 1 }}>
+                        {pergunta.resposta}
+                    </Text>
+                </CardSection>
             );
         }
     }
@@ -38,8 +45,9 @@ const styles = {
     }
 }
 
-const mapStateToProps = state => {
-    return { idPerguntaSelecionada: state.selecionado}
+const mapStateToProps = (state, ownProps) => {
+    const expanded = ownProps.pergunta.id === state.selecionado
+    return { expanded }
 }
 
 export default connect(mapStateToProps, {selecionaPergunta})(Pergunta);
