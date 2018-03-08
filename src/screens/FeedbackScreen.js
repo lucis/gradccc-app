@@ -46,7 +46,7 @@ class FeedbackScreen extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {text: '', feedback: 'email.da.gente@hotmail.com'};
+        this.state = {text: '', feedback: 'suportegradccc@gmail.com'};
       }
     handleOnPress(value){
         this.setState({feedback:value})
@@ -82,12 +82,6 @@ class FeedbackScreen extends React.Component {
                      O seu feedback é muito importante pra nós. 
                      Entre em contato conosco através do campo abaixo indicando melhorias ou fazendo críticas.
                      </Text>
-                      <RadioButton currentValue={this.state.feedback} value={'email.da.gente@hotmail.com'} onPress={this.handleOnPress.bind(this)}>
-                    <Text>Feedback técnico </Text>
-                    </RadioButton>
-                      <RadioButton currentValue={this.state.feedback} value={'email.de.joao@hotmail.com'} onPress={this.handleOnPress.bind(this)}>
-                    <Text>Feedback conteúdo</Text>
-                     </RadioButton>
                     <TextInput
                         placeholder = "Escreva aqui seu comentário."
                         style = {styles.textarea}
