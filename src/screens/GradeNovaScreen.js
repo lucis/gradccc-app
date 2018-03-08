@@ -107,13 +107,15 @@ class GradeNovaScreen extends React.Component {
     );
   }
 
+  // FIXME: Consertar o cálculo para mostrar o componente novamente
+  // {this.mostrarDetalhes()}
+
   render() {
     return (
       <View style={styles.container}>
         <Header headerText="Grade Nova" backFunction = {() => this.goToGradeAntiga()}
                 navigation={ this.props.navigation }/>
         <ScrollView>
-          {this.mostrarDetalhes()}
           <View style={{padding: 10}}>
             {Object.keys(this.props.cadeirasGradeNova || {}).map((periodo)=>
               this.renderPeriodo(periodo)
